@@ -1,0 +1,403 @@
+/* ==========================================================================
+   Admin workbench.
+
+   Shares the public site's colour tokens so the two surfaces look related,
+   but at a denser scale: this is a data tool for one or two staff members on a
+   desktop, not a public mobile page. design-taste-frontend explicitly scopes
+   itself out of admin panels and data tables, so its landing-page rules are not
+   applied here; the accessibility and contrast rules still are.
+   ========================================================================== */
+
+.admin {
+  min-height: 100dvh;
+  background: var(--surface-sunken);
+  color: var(--text);
+}
+
+.admin-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 20px;
+  background: var(--info);          /* BRICS blue, white text 9.14:1 */
+  color: #ffffff;
+}
+
+.admin-bar h1 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 4px;
+  margin-inline-start: auto;
+  flex-wrap: wrap;
+}
+
+.admin-nav a,
+.admin-nav button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: #ffffff;
+  font-size: var(--fs-sm);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.admin-nav a[aria-current='page'] {
+  background: #ffffff;
+  color: var(--info);
+  border-color: #ffffff;
+  font-weight: 600;
+}
+
+.admin-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+}
+
+.admin-h2 {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.admin-lede {
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  margin-bottom: 20px;
+  max-width: 70ch;
+}
+
+.admin-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-sm);
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.admin-empty {
+  padding: 32px 18px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+/* ------------------------------------------------------------- stat tiles - */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 14px 16px;
+}
+
+.stat-label {
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-note {
+  margin-top: 4px;
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+
+/* ----------------------------------------------------------------- table -- */
+
+.admin-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+
+.admin-table th,
+.admin-table td {
+  text-align: start;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.admin-table th {
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.admin-table td.num {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* ----------------------------------------------------------------- badge -- */
+
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: var(--r-pill);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.badge-count {
+  background: var(--info-bg);
+  color: var(--info);
+}
+
+.badge-published { background: #d1fae5; color: #065f46; }
+.badge-draft     { background: var(--warning-bg); color: var(--warning-fg); }
+.badge-retired   { background: #e2e8f0; color: #334155; }
+.badge-admin     { background: var(--surface-muted); color: var(--primary-soft-fg); }
+
+/* ------------------------------------------------------------------ form -- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.field label {
+  font-weight: 500;
+  font-size: var(--fs-sm);
+}
+
+.field-hint {
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+}
+
+/* 17px on every input, not just the composer: iOS Safari zooms the page on
+   focus whenever the computed size is under 16px, including on this page. */
+.field input,
+.field textarea,
+.field select {
+  font: inherit;
+  font-size: 17px;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-control);   /* 4.76:1 */
+  border-radius: var(--r-input);
+  background: var(--surface);
+  color: var(--text);
+  width: 100%;
+}
+
+.field textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 1px solid var(--primary);
+  border-radius: var(--r-input);
+  background: var(--primary);        /* white text 5.93:1 */
+  color: var(--primary-fg);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:hover:not(:disabled)  { background: var(--primary-hover); }
+.btn:active:not(:disabled) { background: var(--primary-active); }
+.btn:disabled              { opacity: 0.5; cursor: default; }
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-quiet {
+  background: var(--surface);
+  color: var(--text-secondary);
+  border-color: var(--border-control);
+  min-height: 40px;
+  padding: 0 14px;
+  font-weight: 500;
+}
+
+.btn-danger {
+  background: var(--surface);
+  color: var(--danger);              /* 6.07:1 on white */
+  border-color: var(--danger);
+  min-height: 40px;
+  padding: 0 14px;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ---------------------------------------------------------------- alerts -- */
+
+/* Focusable error summary at the top of a form, per the UX guideline: focus
+   moves here after a failed submit so a screen reader user is told why. */
+.alert {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: var(--r-input);
+  margin-bottom: 16px;
+  font-size: var(--fs-sm);
+}
+
+.alert-error {
+  background: var(--danger-bg);
+  color: var(--danger-fg);
+  border: 1px solid var(--danger);
+}
+
+.alert-ok {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid var(--success);
+}
+
+.alert:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ----------------------------------------------------------------- login -- */
+
+.login-wrap {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--bg);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 26rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+}
+
+.login-card h1 {
+  font-size: 1.375rem;
+  margin-bottom: 4px;
+}
+
+.login-card > p {
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  margin-bottom: 20px;
+}
+
+/* ---------------------------------------------------------------- queue --- */
+
+.queue-item {
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.queue-head {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.queue-head::-webkit-details-marker { display: none; }
+
+.queue-q {
+  flex: 1 1 16rem;
+  min-width: 0;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.queue-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.queue-body {
+  padding: 4px 16px 18px;
+  border-top: 1px solid var(--border);
+}
+
+.candidates {
+  margin: 12px 0 18px;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+.candidates li {
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.intent-note {
+  margin-top: 6px;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+}

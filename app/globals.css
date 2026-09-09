@@ -1,0 +1,856 @@
+/* ==========================================================================
+   BRICS India 2026 - Delhi Traffic Police Help Desk
+
+   Light only, by instruction. Every colour below carries its measured WCAG
+   contrast ratio in a comment, because two values in this palette are traps:
+
+     - #0EA5E9 (sky-500) with white text is 2.77:1. That fails AA for body text
+       AND fails the 3:1 floor for large text and UI components. It fails at
+       every size. #0284C7 (sky-600) is only 4.10:1 and also fails body AA.
+       Primary buttons use #0369A1 (sky-700) at 5.93:1.
+     - #64748B (slate-500) on the #F0F9FF page ground is 4.46:1, which misses
+       AA by 0.04. Secondary text uses #5B6B7F or darker.
+
+   A white card on the sky-50 ground is 1.07:1, i.e. invisible, so every
+   surface carries both a border and a shadow.
+   ========================================================================== */
+
+:root {
+  /* Surfaces */
+  --bg: #f0f9ff;               /* sky-50 */
+  --surface: #ffffff;
+  --surface-muted: #e0f2fe;    /* sky-100 */
+  --surface-sunken: #f8fafc;   /* slate-50, admin canvas */
+
+  /* Borders. --border is DECORATIVE ONLY at 1.33:1; controls need --border-control. */
+  --border: #bae6fd;           /* sky-200 */
+  --border-strong: #7dd3fc;    /* sky-300 */
+  --border-control: #64748b;   /* slate-500, 4.76:1 on white, clears the 3:1 UI floor */
+
+  /* Brand */
+  --primary: #0369a1;          /* sky-700, white text 5.93:1 */
+  --primary-hover: #075985;    /* sky-800, 7.56:1 */
+  --primary-active: #0c4a6e;   /* sky-900, 9.46:1 */
+  --primary-fg: #ffffff;
+  --primary-soft-bg: #e0f2fe;
+  --primary-soft-fg: #075985;  /* 6.59:1 on the soft background */
+
+  /* Text */
+  --text: #0f172a;             /* slate-900, 16.75:1 on --bg */
+  --text-secondary: #475569;   /* slate-600, 7.11:1 */
+  --text-tertiary: #5b6b7f;    /* 5.11:1 */
+  --text-on-primary: #ffffff;
+
+  /* Semantic. Corrected from the logo palette, which fails at these sizes. */
+  --success: #047857;          /* white text 5.48:1 */
+  --warning: #b45309;
+  --warning-bg: #fef3c7;
+  --warning-fg: #92400e;       /* 6.37:1 on --warning-bg */
+  --danger: #b91c1c;           /* white text 6.47:1 */
+  --danger-bg: #fee2e2;
+  --danger-fg: #991b1b;
+  --info: #1a429b;             /* BRICS blue, white text 9.14:1 */
+  --info-bg: #dbeafe;
+
+  /* BRICS India 2026 logo colours. Used ONLY in the 4px ribbon and the logo. */
+  --brics-blue: #1a429b;
+  --brics-orange: #f69434;
+  --brics-yellow: #fdd314;
+  --brics-green: #00a552;
+  --brics-red: #dc2d28;
+
+  --focus: #0369a1;
+  --shadow-sm: 0 1px 2px rgba(3, 105, 161, 0.08);
+  --shadow-md: 0 2px 8px rgba(3, 105, 161, 0.1);
+
+  /* Shape lock: one radius system, followed everywhere. */
+  --r-pill: 999px;
+  --r-card: 16px;
+  --r-input: 12px;
+  --r-bubble: 16px;
+  --r-tail: 4px;
+
+  /* Type. Body leading is 1.65 because Devanagari matras sit above the
+     headline and below the baseline and need more room than Latin. */
+  --fs-display: 2rem;   --lh-display: 1.25;
+  --fs-h2: 1.5rem;      --lh-h2: 1.3;
+  --fs-h3: 1.25rem;     --lh-h3: 1.35;
+  --fs-lg: 1.125rem;    --lh-lg: 1.6;
+  --fs-body: 1rem;      --lh-body: 1.65;
+  --fs-sm: 0.875rem;    --lh-sm: 1.6;
+  --fs-xs: 0.75rem;     --lh-xs: 1.5;
+
+  --header-h: 56px;
+  --z-chip: 10;
+  --z-sticky: 30;
+  --z-sheet: 40;
+  --z-toast: 60;
+
+  color-scheme: light;
+}
+
+/* --------------------------------------------------------------- reset ---- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * Devanagari renders optically smaller than Latin at the same pixel size, so
+ * the Hindi locale gets a small bump.
+ *
+ * Applied to the ROOT only, as a percentage. `:lang(hi) { font-size: 1.03em }`
+ * looks equivalent and is not: `lang` is inherited, so that selector matches
+ * every descendant and the em multiplier compounds down the tree. Seven levels
+ * of nesting turned 16px body text into 19.7px. Every size in this file is in
+ * rem, so scaling the root scales all of them exactly once.
+ */
+html[lang='hi'] {
+  font-size: 103%;
+}
+
+/* Tracking breaks Devanagari conjuncts, and the script is caseless so
+   uppercasing only mangles interleaved Latin. */
+html[lang='hi'] * {
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+h1, h2, h3, h4, p, ul, ol {
+  margin: 0;
+}
+
+h1 { font-size: var(--fs-display); line-height: var(--lh-display); font-weight: 700; }
+h2 { font-size: var(--fs-h2);      line-height: var(--lh-h2);      font-weight: 600; }
+h3 { font-size: var(--fs-h3);      line-height: var(--lh-h3);      font-weight: 600; }
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+img, svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* --------------------------------------------------------- accessibility -- */
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -60px;
+  z-index: var(--z-toast);
+  padding: 12px 16px;
+  background: var(--primary);
+  color: var(--primary-fg);
+  border-radius: var(--r-input);
+  text-decoration: none;
+  transition: top 120ms ease;
+}
+.skip-link:focus {
+  top: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------------------------------------------------- app shell -- */
+
+/* The entire "five logo colours" moment on the page. Everything below this
+   line is sky and slate: design-taste-frontend locks a page to one accent, and
+   five UI accent colours would read as a 2008 government portal. */
+.brics-ribbon {
+  display: flex;
+  height: 4px;
+  flex: 0 0 auto;
+}
+.brics-ribbon > span {
+  flex: 1;
+}
+
+.shell {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  /* minmax(0, 1fr), not 1fr. A grid item's automatic minimum size is its
+     min-content, so a single nowrap heading inside the header was widening the
+     whole column past the viewport and giving the page a horizontal scroll. */
+  grid-template-columns: minmax(0, 1fr);
+  /* Never 100vh: mobile browser chrome makes it taller than the visible area. */
+  height: 100svh;
+  height: 100dvh;
+  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+}
+
+/* Same reason as the track above: let every row shrink to the column. */
+.shell > * {
+  min-width: 0;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--header-h);
+  padding: 8px 16px;
+  padding-top: max(env(safe-area-inset-top), 8px);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-logo {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+}
+
+.header-text {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.header-title {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.25;
+  /* Wraps to two lines rather than truncating. An ellipsised organisation name
+     on a government service reads as broken, and truncation would hide which
+     department this is. */
+  overflow-wrap: anywhere;
+}
+
+.header-sub {
+  font-size: var(--fs-xs);
+  line-height: 1.3;
+  color: var(--text-tertiary);
+  overflow-wrap: anywhere;
+}
+
+/* ---------------------------------------------------------- lang switch --- */
+
+.lang-switch {
+  display: flex;
+  flex: 0 0 auto;
+  border: 1px solid var(--primary);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.lang-switch a {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  min-width: 56px;
+  padding: 0 10px;
+  white-space: nowrap;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  touch-action: manipulation;
+}
+
+.lang-switch a[aria-current='page'] {
+  background: var(--primary);
+  color: var(--primary-fg);
+}
+
+/* ------------------------------------------------------------------ log --- */
+
+.log {
+  min-width: 0;
+  /* The only scroller on the page. Nested scroll regions are an anti-pattern
+     and make the keyboard-open case much harder to reason about. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  overflow-anchor: auto;
+  scroll-behavior: smooth;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  /* Load-bearing for accessibility, not polish: this is the documented fix for
+     WCAG 2.2 Focus Not Obscured, and a sticky header plus sticky composer is
+     exactly the configuration that fails it. */
+  scroll-padding-block: calc(var(--header-h) + 8px) 96px;
+}
+
+.msg {
+  /* For a long transcript the browser skips layout and paint for off-screen
+     rows entirely, which removes any need for a virtualisation library.
+     contain-intrinsic-size must be set or this trades INP for CLS. */
+  content-visibility: auto;
+  contain-intrinsic-size: 0 80px;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.msg-user {
+  align-items: flex-end;
+}
+
+.bubble {
+  max-inline-size: 45ch;
+  padding: 12px 14px;
+  border-radius: var(--r-bubble);
+  box-shadow: var(--shadow-sm);
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* Hindi wraps shorter than English at the same measure. */
+.bubble:lang(hi) {
+  max-inline-size: 38ch;
+}
+
+.bubble-bot {
+  /* A white card on the sky-50 ground is 1.07:1, so the border is not
+     decoration. Without it the bubble has no visible edge at all. */
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: var(--r-tail);
+}
+
+.bubble-user {
+  background: var(--primary);
+  color: var(--text-on-primary);
+  border: 1px solid var(--primary);
+  border-bottom-right-radius: var(--r-tail);
+}
+
+.bubble-enter {
+  animation: fade-in 150ms ease-out;
+}
+
+/* Motion budget for a public-sector surface is 2: press feedback, a single
+   opacity fade, and the typing indicator. Nothing else. */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ------------------------------------------------------------- cards ------ */
+
+.card {
+  max-inline-size: 45ch;
+  padding: 14px;
+  border-radius: var(--r-card);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-emergency {
+  border-color: var(--danger);
+  border-left-width: 4px;
+  background: var(--danger-bg);
+}
+
+.card-boundary,
+.card-escalate {
+  border-color: var(--border-strong);
+  border-left-width: 4px;
+  background: var(--surface);
+}
+
+.card-fallback {
+  border-color: var(--warning);
+  border-left-width: 4px;
+  background: var(--surface);
+}
+
+.card-title {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.card-body {
+  font-size: var(--fs-body);
+}
+
+.guidance {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+}
+
+.notice {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: var(--r-input);
+  background: var(--warning-bg);
+  color: var(--warning-fg);
+  font-size: var(--fs-sm);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.meta {
+  margin-top: 10px;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+}
+
+/* ------------------------------------------------------------- helplines -- */
+
+.helplines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.call-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid var(--danger);
+  border-radius: var(--r-pill);
+  background: var(--danger);
+  color: #ffffff;              /* 6.47:1 */
+  font-weight: 600;
+  font-size: var(--fs-body);
+  text-decoration: none;
+  touch-action: manipulation;
+}
+
+.call-btn-secondary {
+  background: var(--surface);
+  color: var(--primary);       /* 5.93:1 on white */
+  border-color: var(--primary);
+}
+
+.call-btn:active {
+  transform: translateY(1px);
+}
+
+/* ----------------------------------------------------------------- chips -- */
+
+.chips-label {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  margin: 4px 0 6px;
+}
+
+.chips {
+  /* Wrap rather than scroll. A horizontal chip rail inside a vertical scroller
+     fights the scroll gesture, and truncated labels hide the actual options. */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  min-height: 44px;
+  min-width: 0;
+  padding: 10px 16px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--primary);
+  background: var(--primary-soft-bg);
+  color: var(--primary-soft-fg);   /* 6.59:1 */
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  text-align: start;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.chip:hover {
+  background: #cbeafd;
+}
+
+.chip:active {
+  transform: translateY(1px);
+}
+
+/* -------------------------------------------------------------- feedback -- */
+
+.feedback {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.feedback-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--border-control);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.feedback-btn[aria-pressed='true'] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-fg);
+}
+
+.feedback-thanks {
+  font-size: var(--fs-sm);
+  color: var(--success);
+}
+
+/* --------------------------------------------------------------- typing --- */
+
+.typing {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  padding: 14px;
+}
+
+.typing > span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: bounce 1.1s infinite ease-in-out;
+}
+.typing > span:nth-child(2) { animation-delay: 0.15s; }
+.typing > span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.45; }
+  30%           { transform: translateY(-5px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typing > span { animation: none; opacity: 0.7; }
+}
+
+/* ------------------------------------------------------------- composer --- */
+
+.composer {
+  position: sticky;
+  bottom: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  padding: 12px 16px;
+  /* --kb is set from the VisualViewport API. dvh alone does not fix the iOS
+     keyboard, because the visual viewport shrinks without a layout resize. */
+  padding-bottom: calc(var(--kb, 0px) + max(env(safe-area-inset-bottom), 12px));
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.composer:focus-within {
+  box-shadow: inset 0 2px 0 var(--primary);
+}
+
+.composer-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  /* 17px, not 16px. iOS Safari zooms the page on focus below 16px, and 17px
+     matches the iOS body size. This applies to every input on the site. */
+  font-size: 17px;
+  line-height: 1.5;
+  font-family: inherit;
+  min-height: 48px;
+  max-height: 120px;
+  padding: 12px 14px;
+  border: 1px solid var(--border-control);   /* 4.76:1 */
+  border-radius: var(--r-input);
+  background: var(--surface);
+  color: var(--text);
+  resize: none;
+}
+
+.composer-input::placeholder {
+  color: var(--text-tertiary);   /* 5.45:1 on white */
+}
+
+.send-btn {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--primary);
+  border-radius: var(--r-input);
+  background: var(--primary);
+  color: var(--primary-fg);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.send-btn:hover:not(:disabled) { background: var(--primary-hover); }
+.send-btn:active:not(:disabled) { background: var(--primary-active); }
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.jump-btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--primary);
+  background: var(--surface);
+  color: var(--primary);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+}
+
+.log-wrap {
+  position: relative;
+  min-height: 0;
+  display: flex;
+}
+
+.log-wrap > .log {
+  flex: 1 1 auto;
+}
+
+/* -------------------------------------------------------------- privacy --- */
+
+.privacy {
+  padding: 8px 16px;
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  color: var(--text-tertiary);
+  background: var(--surface-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ------------------------------------------------------------- intro ------ */
+
+.intro {
+  max-inline-size: 45ch;
+}
+
+.intro-disclosure {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  background: var(--surface-muted);
+  color: var(--primary-soft-fg);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+}
+
+.intro-greeting {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-lg);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.intro-scope {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.intro-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 14px;
+  font-size: var(--fs-sm);
+}
+
+.intro-line {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+/* ---------------------------------------------------------------- browse -- */
+
+.browse {
+  padding: 24px 16px 48px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.browse-inner {
+  max-width: 68ch;
+  margin: 0 auto;
+}
+
+.browse h2 {
+  margin-bottom: 6px;
+}
+
+.browse-intro {
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  margin-bottom: 20px;
+}
+
+.browse-group {
+  margin-bottom: 24px;
+}
+
+.browse-group > h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+  border-bottom: 2px solid var(--border-strong);
+}
+
+.browse-count {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--text-tertiary);
+}
+
+.qa {
+  border-bottom: 1px solid var(--border);
+}
+
+.qa > summary {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 14px 4px;
+  min-height: 48px;
+  cursor: pointer;
+  font-weight: 500;
+  list-style: none;
+}
+
+.qa > summary::-webkit-details-marker {
+  display: none;
+}
+
+.qa > summary::after {
+  content: '';
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  margin-top: 6px;
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid var(--primary);
+  border-bottom: 2px solid var(--primary);
+  transform: rotate(45deg);
+  transition: transform 150ms ease;
+}
+
+.qa[open] > summary::after {
+  transform: rotate(-135deg);
+}
+
+.qa-answer {
+  padding: 0 4px 16px;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+}
+
+.qa-meta {
+  margin-top: 10px;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+}
+
+/* ---------------------------------------------------------------- footer -- */
+
+.footer {
+  padding: 20px 16px calc(24px + env(safe-area-inset-bottom));
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.footer a {
+  color: var(--primary);
+}
+
+/* ----------------------------------------------------------- wide screens - */
+
+@media (min-width: 768px) {
+  :root {
+    --fs-display: 2.5rem;
+    --fs-h2: 1.875rem;
+    --fs-h3: 1.375rem;
+  }
+
+  .shell {
+    max-width: 46rem;
+    margin: 0 auto;
+    border-inline: 1px solid var(--border);
+  }
+}

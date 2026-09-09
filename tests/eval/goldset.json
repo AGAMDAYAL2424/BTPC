@@ -1,0 +1,1011 @@
+{
+  "note": "Fresh phrasings that deliberately avoid reusing the wording in data/enrichment.ts variants. Reusing variant text measures nothing but string equality; these are written the way a member of the public would actually ask.",
+  "inScope": [
+    {
+      "q": "सब कुछ बंद हो जाएगा दिल्ली में",
+      "expect": "faq-01",
+      "style": "deva"
+    },
+    {
+      "q": "is the entire capital shutting down",
+      "expect": "faq-01",
+      "style": "en"
+    },
+    {
+      "q": "sab kuch band ho jayega delhi me",
+      "expect": "faq-01",
+      "style": "roman"
+    },
+    {
+      "q": "दोनों तरह के zone में क्या बदलाव है",
+      "expect": "faq-02",
+      "style": "deva"
+    },
+    {
+      "q": "explain the two kinds of security zone",
+      "expect": "faq-02",
+      "style": "en"
+    },
+    {
+      "q": "regulated zone aur controlled zone alag kaise hai",
+      "expect": "faq-02",
+      "style": "roman"
+    },
+    {
+      "q": "मैं लुटियन दिल्ली में रहता हूं आना जाना हो पाएगा",
+      "expect": "faq-03",
+      "style": "deva"
+    },
+    {
+      "q": "I stay inside the NDMC limits will I be let through",
+      "expect": "faq-03",
+      "style": "en"
+    },
+    {
+      "q": "ndmc ke andar rehta hu aana jana ho payega",
+      "expect": "faq-03",
+      "style": "roman"
+    },
+    {
+      "q": "इलाके में रहने वालों की कार को इजाजत है",
+      "expect": "faq-04",
+      "style": "deva"
+    },
+    {
+      "q": "are residents own cars permitted to move",
+      "expect": "faq-04",
+      "style": "en"
+    },
+    {
+      "q": "ilake me rehne walon ki car ko ijazat hai",
+      "expect": "faq-04",
+      "style": "roman"
+    },
+    {
+      "q": "उड़ान पकड़नी है घर से कब चलूं",
+      "expect": "faq-05",
+      "style": "deva"
+    },
+    {
+      "q": "my plane is in the evening when do I start",
+      "expect": "faq-05",
+      "style": "en"
+    },
+    {
+      "q": "flight pakadni hai ghar se kab chalu",
+      "expect": "faq-05",
+      "style": "roman"
+    },
+    {
+      "q": "हवाई अड्डे तक मेट्रो लूं या कार",
+      "expect": "faq-06",
+      "style": "deva"
+    },
+    {
+      "q": "train or road which is safer to reach the terminal",
+      "expect": "faq-06",
+      "style": "en"
+    },
+    {
+      "q": "airport tak metro lu ya car",
+      "expect": "faq-06",
+      "style": "roman"
+    },
+    {
+      "q": "उड़ान के लिए कौन सा प्रमाण साथ ले जाऊं",
+      "expect": "faq-07",
+      "style": "deva"
+    },
+    {
+      "q": "what proof should be in my bag for the terminal",
+      "expect": "faq-07",
+      "style": "en"
+    },
+    {
+      "q": "flight ke liye kaun sa praman sath le jau",
+      "expect": "faq-07",
+      "style": "roman"
+    },
+    {
+      "q": "मेरी रेल नई दिल्ली से है स्टेशन चालू है",
+      "expect": "faq-08",
+      "style": "deva"
+    },
+    {
+      "q": "my train departs from New Delhi is the terminus working",
+      "expect": "faq-08",
+      "style": "en"
+    },
+    {
+      "q": "meri rail nai delhi se hai station chalu hai",
+      "expect": "faq-08",
+      "style": "roman"
+    },
+    {
+      "q": "पुराने शहर के स्टेशन तक जाने में क्या दिक्कत",
+      "expect": "faq-09",
+      "style": "deva"
+    },
+    {
+      "q": "trouble getting to the old city terminus",
+      "expect": "faq-09",
+      "style": "en"
+    },
+    {
+      "q": "purane shahar ke station tak jane me kya dikkat",
+      "expect": "faq-09",
+      "style": "roman"
+    },
+    {
+      "q": "स्टेशन के बाहर किसी को लेने खड़ा हो सकता हूं",
+      "expect": "faq-10",
+      "style": "deva"
+    },
+    {
+      "q": "may I halt outside the terminus to collect my relative",
+      "expect": "faq-10",
+      "style": "en"
+    },
+    {
+      "q": "station ke bahar kisi ko lene khada ho sakta hu",
+      "expect": "faq-10",
+      "style": "roman"
+    },
+    {
+      "q": "मेरी सरकारी भर्ती परीक्षा है केंद्र तक कैसे जाऊं",
+      "expect": "faq-11",
+      "style": "deva"
+    },
+    {
+      "q": "civil services test this week how to reach the hall",
+      "expect": "faq-11",
+      "style": "en"
+    },
+    {
+      "q": "meri sarkari bharti pariksha hai kendra tak kaise jau",
+      "expect": "faq-11",
+      "style": "roman"
+    },
+    {
+      "q": "परीक्षा का पत्र दिखाने से बंद सड़क खुलेगी",
+      "expect": "faq-12",
+      "style": "deva"
+    },
+    {
+      "q": "does my exam letter override a road closure",
+      "expect": "faq-12",
+      "style": "en"
+    },
+    {
+      "q": "pariksha ka patra dikhane se band sadak khulegi",
+      "expect": "faq-12",
+      "style": "roman"
+    },
+    {
+      "q": "अचानक तबीयत बिगड़ जाए तो किसे बुलाऊं",
+      "expect": "faq-13",
+      "style": "deva"
+    },
+    {
+      "q": "someone collapsed and the road is blocked what now",
+      "expect": "faq-13",
+      "style": "en"
+    },
+    {
+      "q": "achanak tabiyat bigad jaye to kisko bulau",
+      "expect": "faq-13",
+      "style": "roman"
+    },
+    {
+      "q": "बीमार को अपनी कार से इलाज के लिए ले जाना है",
+      "expect": "faq-14",
+      "style": "deva"
+    },
+    {
+      "q": "driving a sick relative for treatment in my own car",
+      "expect": "faq-14",
+      "style": "en"
+    },
+    {
+      "q": "bimar ko apni car se ilaj ke liye le jana hai",
+      "expect": "faq-14",
+      "style": "roman"
+    },
+    {
+      "q": "भूमिगत रेल सेवा में कोई बदलाव है",
+      "expect": "faq-15",
+      "style": "deva"
+    },
+    {
+      "q": "any change in underground rail service",
+      "expect": "faq-15",
+      "style": "en"
+    },
+    {
+      "q": "metro me koi badlav hai kya",
+      "expect": "faq-15",
+      "style": "roman"
+    },
+    {
+      "q": "सरकारी बसें अपने रास्ते पर चलेंगी",
+      "expect": "faq-16",
+      "style": "deva"
+    },
+    {
+      "q": "are the city corporation buses on their normal routes",
+      "expect": "faq-16",
+      "style": "en"
+    },
+    {
+      "q": "sarkari busen apne raste par chalengi",
+      "expect": "faq-16",
+      "style": "roman"
+    },
+    {
+      "q": "हरियाणा से आने वाली बस अंदर आ पाएगी",
+      "expect": "faq-17",
+      "style": "deva"
+    },
+    {
+      "q": "will a coach from a neighbouring state be allowed in",
+      "expect": "faq-17",
+      "style": "en"
+    },
+    {
+      "q": "haryana se aane wali bus andar aa payegi",
+      "expect": "faq-17",
+      "style": "roman"
+    },
+    {
+      "q": "तिपहिया और भाड़े की गाड़ी मिलेगी",
+      "expect": "faq-18",
+      "style": "deva"
+    },
+    {
+      "q": "can I hire a three wheeler or a black and yellow",
+      "expect": "faq-18",
+      "style": "en"
+    },
+    {
+      "q": "tipahiya aur bhade ki gaadi milegi",
+      "expect": "faq-18",
+      "style": "roman"
+    },
+    {
+      "q": "मोबाइल से गाड़ी बुक होगी",
+      "expect": "faq-19",
+      "style": "deva"
+    },
+    {
+      "q": "will ride hailing apps work near the venue",
+      "expect": "faq-19",
+      "style": "en"
+    },
+    {
+      "q": "mobile se gaadi book hogi",
+      "expect": "faq-19",
+      "style": "roman"
+    },
+    {
+      "q": "खाने का सामान घर तक पहुंचेगा",
+      "expect": "faq-20",
+      "style": "deva"
+    },
+    {
+      "q": "will my restaurant order reach my flat",
+      "expect": "faq-20",
+      "style": "en"
+    },
+    {
+      "q": "khane ka saman ghar tak pahunchega",
+      "expect": "faq-20",
+      "style": "roman"
+    },
+    {
+      "q": "रोज की जरूरी चीजें आती रहेंगी",
+      "expect": "faq-21",
+      "style": "deva"
+    },
+    {
+      "q": "will daily necessities keep arriving",
+      "expect": "faq-21",
+      "style": "en"
+    },
+    {
+      "q": "roz ki zaroori cheezen aati rahengi",
+      "expect": "faq-21",
+      "style": "roman"
+    },
+    {
+      "q": "माल ढोने वाली गाड़ियों के लिए क्या तय है",
+      "expect": "faq-22",
+      "style": "deva"
+    },
+    {
+      "q": "what has been decided for load carriers",
+      "expect": "faq-22",
+      "style": "en"
+    },
+    {
+      "q": "maal dhone wali gaadiyon ke liye kya tay hai",
+      "expect": "faq-22",
+      "style": "roman"
+    },
+    {
+      "q": "यूपी से आ रहा माल वाहन शहर में घुसेगा",
+      "expect": "faq-23",
+      "style": "deva"
+    },
+    {
+      "q": "goods carrier coming from another state into the city",
+      "expect": "faq-23",
+      "style": "en"
+    },
+    {
+      "q": "up se aa raha maal vahan shahar me ghusega",
+      "expect": "faq-23",
+      "style": "roman"
+    },
+    {
+      "q": "काफिले की वजह से खड़ा हूं क्या करूं",
+      "expect": "faq-24",
+      "style": "deva"
+    },
+    {
+      "q": "held up by a motorcade what should I do",
+      "expect": "faq-24",
+      "style": "en"
+    },
+    {
+      "q": "kafile ki wajah se khada hu kya karu",
+      "expect": "faq-24",
+      "style": "roman"
+    },
+    {
+      "q": "कितने मिनट में रास्ता खुल जाएगा",
+      "expect": "faq-25",
+      "style": "deva"
+    },
+    {
+      "q": "how many minutes before the hold is lifted",
+      "expect": "faq-25",
+      "style": "en"
+    },
+    {
+      "q": "kitne minute me rasta khul jayega",
+      "expect": "faq-25",
+      "style": "roman"
+    },
+    {
+      "q": "इंतजार करते वक्त कार से बाहर खड़ा हो जाऊं",
+      "expect": "faq-26",
+      "style": "deva"
+    },
+    {
+      "q": "should I stand outside my car while waiting",
+      "expect": "faq-26",
+      "style": "en"
+    },
+    {
+      "q": "intezar karte waqt car se bahar khada ho jau",
+      "expect": "faq-26",
+      "style": "roman"
+    },
+    {
+      "q": "मोबाइल से काफिले की रिकॉर्डिंग कर सकता हूं",
+      "expect": "faq-27",
+      "style": "deva"
+    },
+    {
+      "q": "may I record the motorcade on my phone",
+      "expect": "faq-27",
+      "style": "en"
+    },
+    {
+      "q": "mobile se kafile ki recording kar sakta hu",
+      "expect": "faq-27",
+      "style": "roman"
+    },
+    {
+      "q": "रोक हटाकर आगे बढ़ जाऊं",
+      "expect": "faq-28",
+      "style": "deva"
+    },
+    {
+      "q": "can I push aside the blockade and carry on",
+      "expect": "faq-28",
+      "style": "en"
+    },
+    {
+      "q": "rok hatakar aage badh jau",
+      "expect": "faq-28",
+      "style": "roman"
+    },
+    {
+      "q": "जिस सड़क से रोज जाता हूं वो बंद है अब",
+      "expect": "faq-29",
+      "style": "deva"
+    },
+    {
+      "q": "the street I use daily is shut now what",
+      "expect": "faq-29",
+      "style": "en"
+    },
+    {
+      "q": "jis sadak se roz jata hu wo band hai ab",
+      "expect": "faq-29",
+      "style": "roman"
+    },
+    {
+      "q": "फोन का नक्शा सही रास्ता दिखाएगा",
+      "expect": "faq-30",
+      "style": "deva"
+    },
+    {
+      "q": "will the phone map show the correct diversion",
+      "expect": "faq-30",
+      "style": "en"
+    },
+    {
+      "q": "phone ka naksha sahi rasta dikhayega",
+      "expect": "faq-30",
+      "style": "roman"
+    },
+    {
+      "q": "गाड़ी खड़ी करने की जगह मिलेगी",
+      "expect": "faq-31",
+      "style": "deva"
+    },
+    {
+      "q": "where may I leave my vehicle near the venue",
+      "expect": "faq-31",
+      "style": "en"
+    },
+    {
+      "q": "gaadi khadi karne ki jagah milegi",
+      "expect": "faq-31",
+      "style": "roman"
+    },
+    {
+      "q": "बीच सड़क पर गाड़ी बंद पड़ गई",
+      "expect": "faq-32",
+      "style": "deva"
+    },
+    {
+      "q": "my vehicle has stalled in the middle of the road",
+      "expect": "faq-32",
+      "style": "en"
+    },
+    {
+      "q": "beech sadak par gaadi band pad gayi",
+      "expect": "faq-32",
+      "style": "roman"
+    },
+    {
+      "q": "दो गाड़ियां टकरा गईं अब क्या करें",
+      "expect": "faq-33",
+      "style": "deva"
+    },
+    {
+      "q": "two vehicles collided what is the procedure",
+      "expect": "faq-33",
+      "style": "en"
+    },
+    {
+      "q": "do gaadiyan takra gayi ab kya kare",
+      "expect": "faq-33",
+      "style": "roman"
+    },
+    {
+      "q": "भयंकर भीड़ लगी है सड़क पर",
+      "expect": "faq-34",
+      "style": "deva"
+    },
+    {
+      "q": "the road is completely choked what should I do",
+      "expect": "faq-34",
+      "style": "en"
+    },
+    {
+      "q": "bhayankar bheed lagi hai sadak par",
+      "expect": "faq-34",
+      "style": "roman"
+    },
+    {
+      "q": "आवाज करने से गाड़ियां हट जाएंगी",
+      "expect": "faq-35",
+      "style": "deva"
+    },
+    {
+      "q": "will making noise make the cars move",
+      "expect": "faq-35",
+      "style": "en"
+    },
+    {
+      "q": "awaz karne se gaadiyan hat jayengi",
+      "expect": "faq-35",
+      "style": "roman"
+    },
+    {
+      "q": "उल्टी तरफ से गाड़ी निकाल लूं",
+      "expect": "faq-36",
+      "style": "deva"
+    },
+    {
+      "q": "is it fine to cut across against the flow",
+      "expect": "faq-36",
+      "style": "en"
+    },
+    {
+      "q": "ulti taraf se gaadi nikal lu",
+      "expect": "faq-36",
+      "style": "roman"
+    },
+    {
+      "q": "कट आगे निकल गया अब पीछे लूं",
+      "expect": "faq-37",
+      "style": "deva"
+    },
+    {
+      "q": "I went past my cut can I back up",
+      "expect": "faq-37",
+      "style": "en"
+    },
+    {
+      "q": "cut aage nikal gaya ab peeche lu",
+      "expect": "faq-37",
+      "style": "roman"
+    },
+    {
+      "q": "दमकल को जगह देनी पड़ेगी",
+      "expect": "faq-38",
+      "style": "deva"
+    },
+    {
+      "q": "must I make space for a fire engine",
+      "expect": "faq-38",
+      "style": "en"
+    },
+    {
+      "q": "damkal ko jagah deni padegi",
+      "expect": "faq-38",
+      "style": "roman"
+    },
+    {
+      "q": "एक गाड़ी दमकल को नहीं जाने दे रही",
+      "expect": "faq-39",
+      "style": "deva"
+    },
+    {
+      "q": "a car refuses to move aside for the fire engine",
+      "expect": "faq-39",
+      "style": "en"
+    },
+    {
+      "q": "ek gaadi damkal ko nahi jane de rahi",
+      "expect": "faq-39",
+      "style": "roman"
+    },
+    {
+      "q": "मोटरसाइकिल अंदर ले जा सकता हूं",
+      "expect": "faq-40",
+      "style": "deva"
+    },
+    {
+      "q": "may I take my motorbike inside the sealed area",
+      "expect": "faq-40",
+      "style": "en"
+    },
+    {
+      "q": "motorcycle andar le ja sakta hu",
+      "expect": "faq-40",
+      "style": "roman"
+    },
+    {
+      "q": "चलकर जाने वालों को भी रोका जाएगा",
+      "expect": "faq-41",
+      "style": "deva"
+    },
+    {
+      "q": "will people on foot be stopped as well",
+      "expect": "faq-41",
+      "style": "en"
+    },
+    {
+      "q": "chalkar jane walon ko bhi roka jayega",
+      "expect": "faq-41",
+      "style": "roman"
+    },
+    {
+      "q": "बच्चे की गाड़ी समय पर आएगी",
+      "expect": "faq-42",
+      "style": "deva"
+    },
+    {
+      "q": "will my child transport arrive on time",
+      "expect": "faq-42",
+      "style": "en"
+    },
+    {
+      "q": "bachche ki gaadi samay par aayegi",
+      "expect": "faq-42",
+      "style": "roman"
+    },
+    {
+      "q": "नौकरी पर जाने वालों को क्या करना चाहिए",
+      "expect": "faq-43",
+      "style": "deva"
+    },
+    {
+      "q": "advice for people travelling to their workplace",
+      "expect": "faq-43",
+      "style": "en"
+    },
+    {
+      "q": "naukri par jane walon ko kya karna chahiye",
+      "expect": "faq-43",
+      "style": "roman"
+    },
+    {
+      "q": "विभाग के कर्मचारियों को कोई राहत है",
+      "expect": "faq-44",
+      "style": "deva"
+    },
+    {
+      "q": "any relaxation for department employees on duty",
+      "expect": "faq-44",
+      "style": "en"
+    },
+    {
+      "q": "vibhag ke karmchariyon ko koi rahat hai",
+      "expect": "faq-44",
+      "style": "roman"
+    },
+    {
+      "q": "सम्मेलन वाली जगह पर जाना है",
+      "expect": "faq-45",
+      "style": "deva"
+    },
+    {
+      "q": "I have to visit a property hosting the conference",
+      "expect": "faq-45",
+      "style": "en"
+    },
+    {
+      "q": "sammelan wali jagah par jana hai",
+      "expect": "faq-45",
+      "style": "roman"
+    },
+    {
+      "q": "घर के समारोह में मेहमान आ पाएंगे",
+      "expect": "faq-46",
+      "style": "deva"
+    },
+    {
+      "q": "will guests reach my family celebration",
+      "expect": "faq-46",
+      "style": "en"
+    },
+    {
+      "q": "ghar ke samaroh me mehman aa payenge",
+      "expect": "faq-46",
+      "style": "roman"
+    },
+    {
+      "q": "जुलूस के साथ गाड़ियों की कतार ठीक है",
+      "expect": "faq-47",
+      "style": "deva"
+    },
+    {
+      "q": "is a long line of cars in a procession acceptable",
+      "expect": "faq-47",
+      "style": "en"
+    },
+    {
+      "q": "juloos ke sath gaadiyon ki katar theek hai",
+      "expect": "faq-47",
+      "style": "roman"
+    },
+    {
+      "q": "बिना बताए सड़क रोक दी गई",
+      "expect": "faq-48",
+      "style": "deva"
+    },
+    {
+      "q": "the road was halted with no warning",
+      "expect": "faq-48",
+      "style": "en"
+    },
+    {
+      "q": "bina bataye sadak rok di gayi",
+      "expect": "faq-48",
+      "style": "roman"
+    },
+    {
+      "q": "भरोसेमंद खबर कहां से लूं",
+      "expect": "faq-49",
+      "style": "deva"
+    },
+    {
+      "q": "what is the trustworthy source for updates",
+      "expect": "faq-49",
+      "style": "en"
+    },
+    {
+      "q": "bharosemand khabar kahan se lu",
+      "expect": "faq-49",
+      "style": "roman"
+    },
+    {
+      "q": "झूठी सूचना आगे भेज दूं",
+      "expect": "faq-50",
+      "style": "deva"
+    },
+    {
+      "q": "should I pass on an unverified update",
+      "expect": "faq-50",
+      "style": "en"
+    },
+    {
+      "q": "jhoothi soochna aage bhej du",
+      "expect": "faq-50",
+      "style": "roman"
+    },
+    {
+      "q": "जाम की खबर पुलिस को कैसे दूं",
+      "expect": "faq-51",
+      "style": "deva"
+    },
+    {
+      "q": "how do I tell the police about a blockage",
+      "expect": "faq-51",
+      "style": "en"
+    },
+    {
+      "q": "jam ki khabar police ko kaise du",
+      "expect": "faq-51",
+      "style": "roman"
+    },
+    {
+      "q": "नियम तोड़ने वाले की सूचना कहां दें",
+      "expect": "faq-52",
+      "style": "deva"
+    },
+    {
+      "q": "where to report someone breaking the rules",
+      "expect": "faq-52",
+      "style": "en"
+    },
+    {
+      "q": "niyam todne wale ki soochna kahan de",
+      "expect": "faq-52",
+      "style": "roman"
+    },
+    {
+      "q": "आम लोग किस तरह सहयोग करें",
+      "expect": "faq-53",
+      "style": "deva"
+    },
+    {
+      "q": "in what way can ordinary people assist",
+      "expect": "faq-53",
+      "style": "en"
+    },
+    {
+      "q": "aam log kis tarah sahyog kare",
+      "expect": "faq-53",
+      "style": "roman"
+    },
+    {
+      "q": "हमारा सबसे बड़ा कर्तव्य क्या है",
+      "expect": "faq-54",
+      "style": "deva"
+    },
+    {
+      "q": "what is our foremost obligation",
+      "expect": "faq-54",
+      "style": "en"
+    },
+    {
+      "q": "hamara sabse bada kartavya kya hai",
+      "expect": "faq-54",
+      "style": "roman"
+    },
+    {
+      "q": "मंजिल का पता नहीं है क्या करूं",
+      "expect": "faq-55",
+      "style": "deva"
+    },
+    {
+      "q": "I am unsure of the directions what should I do",
+      "expect": "faq-55",
+      "style": "en"
+    },
+    {
+      "q": "manzil ka pata nahi hai kya karu",
+      "expect": "faq-55",
+      "style": "roman"
+    },
+    {
+      "q": "जल्दबाजी में गाड़ी दौड़ाना सही है",
+      "expect": "faq-56",
+      "style": "deva"
+    },
+    {
+      "q": "is rushing the car around a good idea",
+      "expect": "faq-56",
+      "style": "en"
+    },
+    {
+      "q": "jaldbazi me gaadi daudana sahi hai",
+      "expect": "faq-56",
+      "style": "roman"
+    },
+    {
+      "q": "टंकी भरवा कर निकलना चाहिए",
+      "expect": "faq-57",
+      "style": "deva"
+    },
+    {
+      "q": "should the tank be full before setting out",
+      "expect": "faq-57",
+      "style": "en"
+    },
+    {
+      "q": "tanki bharwa kar nikalna chahiye",
+      "expect": "faq-57",
+      "style": "roman"
+    },
+    {
+      "q": "निकलने से पहले गाड़ी देख लेनी चाहिए",
+      "expect": "faq-58",
+      "style": "deva"
+    },
+    {
+      "q": "ought I inspect the car before setting off",
+      "expect": "faq-58",
+      "style": "en"
+    },
+    {
+      "q": "nikalne se pehle gaadi dekh leni chahiye",
+      "expect": "faq-58",
+      "style": "roman"
+    },
+    {
+      "q": "कोई जानकर नियम तोड़ रहा है तो",
+      "expect": "faq-59",
+      "style": "deva"
+    },
+    {
+      "q": "someone is flouting the rules on purpose",
+      "expect": "faq-59",
+      "style": "en"
+    },
+    {
+      "q": "koi jankar niyam tod raha hai to",
+      "expect": "faq-59",
+      "style": "roman"
+    },
+    {
+      "q": "सम्मेलन के दिनों में सबसे अच्छी सलाह",
+      "expect": "faq-60",
+      "style": "deva"
+    },
+    {
+      "q": "overall guidance for travelling during the conference",
+      "expect": "faq-60",
+      "style": "en"
+    },
+    {
+      "q": "sammelan ke dinon me sabse achhi salah",
+      "expect": "faq-60",
+      "style": "roman"
+    }
+  ],
+  "outOfScope": [
+    "aaj ka mausam kaise hai",
+    "आज का मौसम कैसा रहेगा",
+    "what is the weather forecast",
+    "pizza recipe batao",
+    "who won the cricket match",
+    "asdfgh qwerty zxcvb",
+    "bitcoin price today",
+    "tell me a joke",
+    "सोने का भाव क्या है",
+    "gold rate kya chal raha hai",
+    "how do I apply for a passport",
+    "पासपोर्ट कैसे बनवाएं",
+    "best restaurant in delhi",
+    "दिल्ली में घूमने की जगह",
+    "kal chhutti hai kya",
+    "who is the prime minister",
+    "translate this to french",
+    "मेरा फोन खो गया है",
+    "how to lose weight",
+    "stock market kaise sikhu",
+    "जन्मदिन की शुभकामनाएं",
+    "what is the capital of france",
+    "hotel booking karni hai online",
+    "मुझे नौकरी चाहिए",
+    "cricket score",
+    "1234567890",
+    "hello",
+    "नमस्ते",
+    "aap kaise ho",
+    "who made you"
+  ],
+  "ruleCases": [
+    {
+      "q": "accident ho gaya hai koi ghayal hai",
+      "expect": "emergency"
+    },
+    {
+      "q": "दुर्घटना हो गई है खून बह रहा है",
+      "expect": "emergency"
+    },
+    {
+      "q": "there has been a crash someone is injured",
+      "expect": "emergency"
+    },
+    {
+      "q": "aag lag gayi hai",
+      "expect": "emergency"
+    },
+    {
+      "q": "आग लग गई है जल्दी भेजो",
+      "expect": "emergency"
+    },
+    {
+      "q": "someone is having a heart attack",
+      "expect": "emergency"
+    },
+    {
+      "q": "मुझे तुरंत ambulance चाहिए",
+      "expect": "emergency"
+    },
+    {
+      "q": "help me my father collapsed",
+      "expect": "emergency"
+    },
+    {
+      "q": "loot liya gaya hai bachao",
+      "expect": "emergency"
+    },
+    {
+      "q": "मेरा challan kitna hai",
+      "expect": "personalization"
+    },
+    {
+      "q": "my car was towed where is it",
+      "expect": "personalization"
+    },
+    {
+      "q": "meri gaadi uthwa li gayi kahan hai",
+      "expect": "personalization"
+    },
+    {
+      "q": "check my challan status",
+      "expect": "personalization"
+    },
+    {
+      "q": "क्या मेरा pass approve हो गया",
+      "expect": "personalization"
+    },
+    {
+      "q": "mera chalan pending hai kya",
+      "expect": "personalization"
+    },
+    {
+      "q": "मुझे किसी इंसान से बात करनी है",
+      "expect": "human_request"
+    },
+    {
+      "q": "i want to talk to a real person",
+      "expect": "human_request"
+    },
+    {
+      "q": "kisi officer se baat karao",
+      "expect": "human_request"
+    }
+  ]
+}

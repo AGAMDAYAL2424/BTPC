@@ -1,0 +1,362 @@
+[
+  {
+    "id": "faq-01",
+    "number": 1,
+    "questionHi": "क्या BRICS Summit के दौरान पूरी Delhi बंद रहेगी?",
+    "answerHi": "नहीं, पूरी Delhi बंद नहीं रहेगी। Traffic restrictions मुख्य रूप से Summit venue, VIP movement वाले routes और security-sensitive areas में हो सकती हैं। बाकी Delhi में traffic सामान्य रूप से चलता रहेगा। हालांकि VIP movement के दौरान कुछ routes पर थोड़ी देर के लिए traffic रोका या divert किया जा सकता है।"
+  },
+  {
+    "id": "faq-02",
+    "number": 2,
+    "questionHi": "Controlled Zone और Regulated Zone में क्या फर्क है?",
+    "answerHi": "Controlled Zone में security ज्यादा tight होगी और entry केवल authorized लोगों को लागू नियमों के अनुसार मिलेगी। Regulated Zone में सामान्य traffic चलता रहेगा, लेकिन VIP movement या security requirement के समय traffic को temporarily regulate किया जा सकता है।"
+  },
+  {
+    "id": "faq-03",
+    "number": 3,
+    "questionHi": "नई Delhi/NDMC area के residents अपने घर कैसे आ-जा सकेंगे?",
+    "answerHi": "Residents अपना valid ID साथ रखें और security checking के दौरान police personnel को पूरा cooperation दें। जहां local movement की अनुमति होगी, वहां निर्धारित route से आने-जाने दिया जाएगा। Main road पर unnecessary parking या रुकने से बचें।"
+  },
+  {
+    "id": "faq-04",
+    "number": 4,
+    "questionHi": "क्या NDMC area में रहने वाले लोगों के private vehicles चल सकेंगे?",
+    "answerHi": "जहां traffic plan के अनुसार अनुमति होगी, वहां local residents के vehicles को movement की सुविधा दी जाएगी। लेकिन security arrangements के कारण कुछ roads पर temporary restrictions हो सकती हैं। मौके पर traffic police के instructions follow करें।"
+  },
+  {
+    "id": "faq-05",
+    "number": 5,
+    "questionHi": "मुझे Airport जाना है। कितनी जल्दी घर से निकलना चाहिए?",
+    "answerHi": "Summit के दौरान VIP movement और security arrangements की वजह से कुछ routes पर extra time लग सकता है। इसलिए flight के लिए सामान्य से काफी पहले निकलें और कम से कम 60 से 90 मिनट का buffer time रखना बेहतर रहेगा।"
+  },
+  {
+    "id": "faq-06",
+    "number": 6,
+    "questionHi": "Airport जाने के लिए Metro बेहतर option है?",
+    "answerHi": "जहां possible हो, Metro एक convenient option है। Road traffic पर restrictions या temporary stoppages का असर हो सकता है। यात्रा से पहले Metro और road route की latest स्थिति check कर लें।"
+  },
+  {
+    "id": "faq-07",
+    "number": 7,
+    "questionHi": "Airport जाते समय कौन से documents साथ रखें?",
+    "answerHi": "अपना flight ticket या booking details और valid ID साथ रखें। Security checking के दौरान जरूरत पड़ने पर इन्हें दिखाना useful रहेगा।"
+  },
+  {
+    "id": "faq-08",
+    "number": 8,
+    "questionHi": "मुझे New Delhi Railway Station जाना है। क्या station खुला रहेगा?",
+    "answerHi": "Railway station की services जारी रहेंगी, लेकिन station तक पहुंचने वाले कुछ routes पर traffic restrictions या diversion हो सकता है। जहां possible हो, Metro या public transport को preference दें और extra time लेकर निकलें।"
+  },
+  {
+    "id": "faq-09",
+    "number": 9,
+    "questionHi": "पुरानी Delhi Railway Station जाने में क्या परेशानी हो सकती है?",
+    "answerHi": "Station की ओर जाने वाले routes पर VIP movement या security arrangements के कारण temporary traffic control हो सकता है। Latest traffic advisory देखकर route plan करें।"
+  },
+  {
+    "id": "faq-10",
+    "number": 10,
+    "questionHi": "Railway station पर किसी passenger को लेने जाना है। क्या road पर vehicle रोक सकते हैं?",
+    "answerHi": "नहीं। Station के आसपास road पर vehicle रोककर passenger का wait न करें। केवल authorized parking या निर्धारित pick-up/drop-off area का इस्तेमाल करें।"
+  },
+  {
+    "id": "faq-11",
+    "number": 11,
+    "questionHi": "मेरा 13 September UPSC/NDA/CDS है। Exam centre कैसे पहुंचूं?",
+    "answerHi": "Admit card साथ रखें और exam centre की location पहले से check कर लें। जहां possible हो, Metro या public transport का इस्तेमाल करें और काफी पहले घर से निकलें। Traffic restrictions के कारण last-minute परेशानी से बचें।"
+  },
+  {
+    "id": "faq-12",
+    "number": 12,
+    "questionHi": "क्या Admit Card दिखाने पर restricted road से जाने दिया जाएगा?",
+    "answerHi": "ऐसा automatically नहीं माना जाना चाहिए। Admit card आपके travel purpose को समझने में मदद कर सकता है, लेकिन final decision उस समय लागू traffic और security arrangements के अनुसार होगा। Police के बताए alternate route को follow करें।"
+  },
+  {
+    "id": "faq-13",
+    "number": 13,
+    "questionHi": "Medical emergency होने पर क्या करें?",
+    "answerHi": "घबराएं नहीं। अगर ambulance जा रही है तो उसे रास्ता देने में मदद करें। अगर किसी medical emergency के कारण आपको immediate assistance चाहिए और route blocked है, तो मौके पर मौजूद traffic police को बताएं या 112/1095 पर contact करें।"
+  },
+  {
+    "id": "faq-14",
+    "number": 14,
+    "questionHi": "Hospital जाने वाले patient के private vehicle के लिए क्या व्यवस्था होगी?",
+    "answerHi": "Real medical emergency में police personnel को situation की जानकारी दें और उनके instructions follow करें। Barricade हटाने या security व्यवस्था को bypass करने की कोशिश न करें। Traffic police उपलब्ध situation के अनुसार safe passage देने की कोशिश करेगी।"
+  },
+  {
+    "id": "faq-15",
+    "number": 15,
+    "questionHi": "क्या Delhi Metro सामान्य रूप से चलेगी?",
+    "answerHi": "Metro services सामान्य रूप से चलने की संभावना है, लेकिन security reasons से कुछ stations पर entry/exit या किसी particular gate को temporarily control किया जा सकता है। यात्रा से पहले Metro की latest advisory check करें।"
+  },
+  {
+    "id": "faq-16",
+    "number": 16,
+    "questionHi": "क्या DTC buses चलेंगी?",
+    "answerHi": "Bus services चलती रहेंगी, लेकिन affected areas में कुछ routes temporarily change, restrict या divert किए जा सकते हैं। यात्रा से पहले route की latest स्थिति check करें।"
+  },
+  {
+    "id": "faq-17",
+    "number": 17,
+    "questionHi": "क्या Inter-State buses का Delhi में entry normal रहेगा?",
+    "answerHi": "कुछ inter-state buses के routes में situation के अनुसार बदलाव हो सकता है। Passengers को संबंधित bus service और latest traffic advisory देखकर यात्रा plan करनी चाहिए।"
+  },
+  {
+    "id": "faq-18",
+    "number": 18,
+    "questionHi": "क्या Auto और Taxi चल सकेंगे?",
+    "answerHi": "जहां permission होगी, वहां Auto और Taxi services चलेंगी। लेकिन controlled या restricted areas में इनका movement प्रभावित हो सकता है।"
+  },
+  {
+    "id": "faq-19",
+    "number": 19,
+    "questionHi": "क्या Ola, Uber और दूसरी cab services available रहेंगी?",
+    "answerHi": "Cab services available रह सकती हैं, लेकिन restricted areas में vehicle का entry या passenger pick-up प्रभावित हो सकता है। Driver से pick-up point और route पहले confirm कर लें।"
+  },
+  {
+    "id": "faq-20",
+    "number": 20,
+    "questionHi": "क्या Swiggy, Zomato, Blinkit जैसी delivery services काम करेंगी?",
+    "answerHi": "Delhi के ज्यादातर areas में delivery services चल सकती हैं। लेकिन controlled zones में entry और delivery vehicles पर temporary restrictions हो सकती हैं। Essential supplies के लिए लागू व्यवस्था अलग हो सकती है।"
+  },
+  {
+    "id": "faq-21",
+    "number": 21,
+    "questionHi": "क्या दूध, दवा और दूसरी essential supplies की delivery प्रभावित होगी?",
+    "answerHi": "Essential services को सुचारु रखने की कोशिश की जाएगी। फिर भी affected areas में entry time या route restrictions हो सकती हैं। संबंधित official instructions follow करें।"
+  },
+  {
+    "id": "faq-22",
+    "number": 22,
+    "questionHi": "Heavy vehicles और trucks के लिए क्या rules होंगे?",
+    "answerHi": "Heavy और goods vehicles के लिए अलग traffic arrangements लागू हो सकते हैं। Entry restrictions, time restrictions या alternate routes तय किए जा सकते हैं। Truck drivers को यात्रा से पहले latest traffic advisory check करनी चाहिए।"
+  },
+  {
+    "id": "faq-23",
+    "number": 23,
+    "questionHi": "क्या दूसरे राज्यों से आने वाले trucks को Delhi में entry मिलेगी?",
+    "answerHi": "Restricted period में कुछ heavy vehicles को Delhi के बाहर alternate routes की तरफ divert किया जा सकता है। लागू notification और diversion plan को follow करें।"
+  },
+  {
+    "id": "faq-24",
+    "number": 24,
+    "questionHi": "अगर VIP movement की वजह से मेरी गाड़ी रोक दी जाए तो क्या करें?",
+    "answerHi": "Patience रखें और अपनी lane में रहें। Wrong lane, फुटपाथ या गलत direction से निकलने की कोशिश न करें और intersection block न करें। VIP movement clear होने के बाद traffic police के signal पर traffic छोड़ा जाएगा।"
+  },
+  {
+    "id": "faq-25",
+    "number": 25,
+    "questionHi": "VIP movement के दौरान traffic कितनी देर रोका जाएगा?",
+    "answerHi": "इसकी कोई fixed time limit नहीं बताई जा सकती। यह convoy, security arrangements और मौके की situation पर depend करता है। Police instructions follow करें और unnecessary horn न बजाएं।"
+  },
+  {
+    "id": "faq-26",
+    "number": 26,
+    "questionHi": "क्या VIP movement के दौरान vehicle से उतरना चाहिए?",
+    "answerHi": "नहीं। बिना जरूरत vehicle से बाहर न निकलें। अपनी lane में safely रहें और traffic police के instructions follow करें।"
+  },
+  {
+    "id": "faq-27",
+    "number": 27,
+    "questionHi": "क्या VIP convoy की photo/video बनानी चाहिए?",
+    "answerHi": "Security arrangements के दौरान convoy के पास जाकर photo या video बनाने से बचें। Traffic और security movement में किसी तरह की बाधा न डालें।"
+  },
+  {
+    "id": "faq-28",
+    "number": 28,
+    "questionHi": "क्या barricade हटाकर restricted road से निकल सकते हैं?",
+    "answerHi": "नहीं। Barricade हटाना या security arrangement को cross करने की कोशिश न करें। Traffic police द्वारा बताए गए alternate route का इस्तेमाल करें।"
+  },
+  {
+    "id": "faq-29",
+    "number": 29,
+    "questionHi": "अगर मेरा normal route अचानक बंद मिले तो क्या करूं?",
+    "answerHi": "घबराएं नहीं। Safe जगह पर रुककर alternate route देखें। Official traffic advisory और मौके पर मौजूद traffic police के instructions follow करें। Wrong-side driving करके या restricted road में जबरन entry न करें।"
+  },
+  {
+    "id": "faq-30",
+    "number": 30,
+    "questionHi": "क्या Google Maps या दूसरे navigation apps पर पूरी तरह भरोसा कर सकते हैं?",
+    "answerHi": "Navigation apps useful हैं, लेकिन temporary traffic restrictions या VIP movement तुरंत update न हों। इसलिए official traffic advisory को priority दें।"
+  },
+  {
+    "id": "faq-31",
+    "number": 31,
+    "questionHi": "क्या parking पर special restrictions होंगी?",
+    "answerHi": "हां। Security-sensitive areas, main roads, intersections और venue के आसपास parking पर special restrictions हो सकती हैं। केवल authorized parking का इस्तेमाल करें।"
+  },
+  {
+    "id": "faq-32",
+    "number": 32,
+    "questionHi": "अगर मेरी गाड़ी रास्ते में breakdown हो जाए तो क्या करूं?",
+    "answerHi": "अगर possible हो तो vehicle को safe side पर ले जाएं, hazard lights on करें और road के बीच vehicle छोड़कर न जाएं। Traffic बाधित हो रही हो तो Delhi Traffic Police की मदद के लिए 1095 पर contact करें।"
+  },
+  {
+    "id": "faq-33",
+    "number": 33,
+    "questionHi": "Accident होने पर क्या करना चाहिए?",
+    "answerHi": "सबसे पहले अपनी और दूसरों की safety देखें। Injured व्यक्ति को medical help दिलाएं। जरूरत पड़ने पर 112 पर contact करें और traffic police को सूचना दें। Accident spot पर unnecessary crowd न लगाएं।"
+  },
+  {
+    "id": "faq-34",
+    "number": 34,
+    "questionHi": "अगर traffic jam बहुत ज्यादा हो तो क्या करें?",
+    "answerHi": "Intersection block न करें, wrong-side driving न करें और बार-बार lane change से बचें। Traffic police के instructions follow करें और possible हो तो alternate route लें।"
+  },
+  {
+    "id": "faq-35",
+    "number": 35,
+    "questionHi": "क्या jam में लगातार horn बजाने से traffic जल्दी खुलेगा?",
+    "answerHi": "नहीं। Unnecessary horn से traffic जल्दी clear नहीं होता। इससे noise और stress बढ़ता है। Patience रखें और अपनी lane में रहें।"
+  },
+  {
+    "id": "faq-36",
+    "number": 36,
+    "questionHi": "क्या jam से निकलने के लिए wrong-side driving कर सकते हैं?",
+    "answerHi": "बिल्कुल नहीं। Wrong-side driving serious accident का कारण बन सकती है और traffic situation को और खराब करती है।"
+  },
+  {
+    "id": "faq-37",
+    "number": 37,
+    "questionHi": "अगर अपना turn या exit miss हो जाए तो क्या करें?",
+    "answerHi": "अचानक brake न लगाएं, reverse न लें और wrong direction में वापस जाने की कोशिश न करें। आगे जाकर safe और legal जगह से route change करें। कुछ मिनट की delay, accident से बेहतर है।"
+  },
+  {
+    "id": "faq-38",
+    "number": 38,
+    "questionHi": "क्या emergency vehicles को रास्ता देना जरूरी है?",
+    "answerHi": "हां। Ambulance, fire tender और दूसरे emergency vehicles को safe passage दें। अचानक lane change करने के बजाय शांत रहते हुए रास्ता बनाएं।"
+  },
+  {
+    "id": "faq-39",
+    "number": 39,
+    "questionHi": "अगर कोई vehicle emergency vehicle का रास्ता रोक रहा हो तो क्या करें?",
+    "answerHi": "खुद उससे विवाद न करें। Safe distance से traffic police को सूचना दें। Immediate danger हो तो 112 या traffic assistance के लिए 1095 पर contact करें।"
+  },
+  {
+    "id": "faq-40",
+    "number": 40,
+    "questionHi": "क्या two-wheelers restricted areas में जा सकेंगे?",
+    "answerHi": "यह उस समय लागू traffic और security plan पर depend करेगा। किसी restricted area में जाने से पहले latest official traffic advisory check करें।"
+  },
+  {
+    "id": "faq-41",
+    "number": 41,
+    "questionHi": "क्या pedestrian’s और cyclists’ पर भी restrictions हो सकती हैं?",
+    "answerHi": "हां। Security-sensitive areas में pedestrian और cycle movement को भी temporarily regulate किया जा सकता है। मौके पर मौजूद police personnel के instructions follow करें।"
+  },
+  {
+    "id": "faq-42",
+    "number": 42,
+    "questionHi": "क्या school buses और school vehicles की movement प्रभावित हो सकती है?",
+    "answerHi": "अगर school affected area में है तो bus routes और timings प्रभावित हो सकते हैं। Parents और school management को यात्रा से पहले latest traffic information check करनी चाहिए।"
+  },
+  {
+    "id": "faq-43",
+    "number": 43,
+    "questionHi": "Office जाने वाले लोगों को क्या सावधानी रखनी चाहिए?",
+    "answerHi": "Travel plan पहले बनाएं, affected routes check करें और possible हो तो public transport का इस्तेमाल करें। Important duty या meeting हो तो extra travel time रखें।"
+  },
+  {
+    "id": "faq-44",
+    "number": 44,
+    "questionHi": "क्या government office और essential services के staff के लिए कोई special व्यवस्था होगी?",
+    "answerHi": "जहां जरूरत होगी, संबंधित departments के साथ coordination किया जाएगा। Staff को अपना official ID साथ रखना चाहिए और security checking में cooperation करना चाहिए।"
+  },
+  {
+    "id": "faq-45",
+    "number": 45,
+    "questionHi": "अगर मुझे किसी hotel या Summit-related venue पर जाना है तो क्या करूं?",
+    "answerHi": "Hotel या venue से entry instructions पहले confirm करें। निर्धारित entry route और timing follow करें। बिना authorization controlled area में जाने की कोशिश न करें।"
+  },
+  {
+    "id": "faq-46",
+    "number": 46,
+    "questionHi": "क्या private function या शादी में जाने वाले लोगों पर भी असर पड़ेगा?",
+    "answerHi": "अगर function affected area में है तो guests और vehicles की movement प्रभावित हो सकती है। Organisers को guests को पहले से route और parking की जानकारी देनी चाहिए।"
+  },
+  {
+    "id": "faq-47",
+    "number": 47,
+    "questionHi": "क्या बारात या बड़े vehicle convoy के साथ सड़क पर चलना ठीक है?",
+    "answerHi": "नहीं। Road पर vehicles रोकना, unnecessary convoy बनाना या traffic block करना उचित नहीं है। Traffic rules और police instructions follow करें।"
+  },
+  {
+    "id": "faq-48",
+    "number": 48,
+    "questionHi": "अगर traffic police किसी road पर अचानक traffic रोक दे तो क्या करें?",
+    "answerHi": "Security या VIP movement के दौरान मौके की situation के अनुसार immediate decision लिया जा सकता है। Police personnel के instructions follow करें और barricading को bypass करने की कोशिश न करें।"
+  },
+  {
+    "id": "faq-49",
+    "number": 49,
+    "questionHi": "सही और latest traffic information कहां मिलेगी?",
+    "answerHi": "Delhi Traffic Police के official communication channels, traffic advisories और मौके पर तैनात traffic police personnel से मिली जानकारी को priority दें। Unverified social media messages पर भरोसा न करें।"
+  },
+  {
+    "id": "faq-50",
+    "number": 50,
+    "questionHi": "Social media पर गलत traffic information मिले तो क्या करें?",
+    "answerHi": "बिना verification किसी message को forward न करें। Official source से information confirm करें। गलत सूचना से unnecessary panic और traffic congestion बढ़ सकता है।"
+  },
+  {
+    "id": "faq-51",
+    "number": 51,
+    "questionHi": "क्या नागरिक traffic problem की information Delhi Traffic Police को दे सकते हैं?",
+    "answerHi": "हां। Accident, vehicle breakdown, serious congestion या किसी अन्य urgent traffic problem की सूचना Delhi Traffic Police को 1095 पर दी जा सकती है। Emergency में 112 पर contact करें।"
+  },
+  {
+    "id": "faq-52",
+    "number": 52,
+    "questionHi": "क्या नागरिक traffic violations की information दे सकते हैं?",
+    "answerHi": "हां। Wrong-side driving, illegal parking, signal violation, encroachment जैसी actionable traffic problems की information official channels के जरिए दी जा सकती है। Location, time और problem की clear details देने से action लेने में मदद मिलती है।"
+  },
+  {
+    "id": "faq-53",
+    "number": 53,
+    "questionHi": "क्या नागरिक traffic police की मदद कर सकते हैं?",
+    "answerHi": "बिल्कुल। Traffic management सिर्फ police की responsibility नहीं है। Lane discipline, सही parking, intersection clear रखना, wrong-side driving से बचना और patience के साथ driving करना traffic को बेहतर बनाने में सीधी मदद करता है।"
+  },
+  {
+    "id": "faq-54",
+    "number": 54,
+    "questionHi": "नागरिकों की सबसे बड़ी responsibility क्या होगी?",
+    "answerHi": "Rules follow करना और traffic police के instructions में cooperation करना। एक vehicle का गलत lane change, intersection block करना या wrong-side driving कई लोगों के लिए लंबा jam पैदा कर सकता है।"
+  },
+  {
+    "id": "faq-55",
+    "number": 55,
+    "questionHi": "अगर मुझे रास्ता नहीं पता हो तो क्या करूं?",
+    "answerHi": "चलती गाड़ी में mobile देखकर route खोजने की कोशिश न करें। Safe जगह पर रुककर navigation check करें या traffic police से मदद लें। Safety से compromise करके route खोजने की कोशिश न करें।"
+  },
+  {
+    "id": "faq-56",
+    "number": 56,
+    "questionHi": "क्या traffic restrictions के दौरान जल्दी-जल्दी driving करना safe है?",
+    "answerHi": "नहीं। Changed routes और restrictions के दौरान जल्दबाजी accident का risk बढ़ाती है। Speed limit, lane discipline और traffic police के instructions follow करें।"
+  },
+  {
+    "id": "faq-57",
+    "number": 57,
+    "questionHi": "क्या लंबी यात्रा से पहले vehicle में पर्याप्त fuel रखना चाहिए?",
+    "answerHi": "हां। लंबी journey से पहले fuel और vehicle की basic condition check कर लें। Traffic restrictions के कारण journey time बढ़ सकता है।"
+  },
+  {
+    "id": "faq-58",
+    "number": 58,
+    "questionHi": "क्या यात्रा से पहले vehicle की basic checking करनी चाहिए?",
+    "answerHi": "हां। Tyre, brake, fuel, battery, lights और जरूरी documents check कर लें। Breakdown से road पर unnecessary congestion हो सकता है।"
+  },
+  {
+    "id": "faq-59",
+    "number": 59,
+    "questionHi": "अगर कोई व्यक्ति जानबूझकर traffic rules तोड़ रहा हो तो क्या करें?",
+    "answerHi": "खुद उससे बहस या confrontation न करें। अगर उसकी driving से immediate danger या serious traffic problem हो रही है तो safe distance से traffic police को information दें।"
+  },
+  {
+    "id": "faq-60",
+    "number": 60,
+    "questionHi": "BRICS Summit के दौरान सबसे safe traffic strategy क्या है?",
+    "answerHi": "Journey पहले plan करें, official traffic advisory देखें, possible हो तो Metro या public transport लें, extra buffer time रखें और मौके पर traffic police के instructions follow करें।"
+  }
+]
