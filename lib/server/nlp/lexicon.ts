@@ -41,7 +41,11 @@ const SYNONYM_GROUPS: string[][] = [
   ['horn', 'honk', 'हॉर्न', 'bajana', 'awaz', 'आवाज', 'noise', 'shor', 'शोर'],
   ['turn', 'exit', 'mod', 'मोड़', 'cut', 'कट', 'reverse', 'peeche', 'पीछे'],
   ['route', 'rasta', 'raasta', 'रास्ता', 'sadak', 'सड़क', 'road', 'street', 'diversion', 'divert'],
-  ['destination', 'manzil', 'मंजिल', 'directions', 'naksha', 'नक्शा', 'maps', 'navigation', 'gps'],
+  // Split deliberately: a question about TRUSTING a map app and a question
+  // about not knowing the way are different rows, and one group covering both
+  // made the wrong one win with high confidence.
+  ['naksha', 'नक्शा', 'maps', 'navigation', 'gps'],
+  ['destination', 'manzil', 'मंजिल', 'directions', 'pata', 'पता', 'lost'],
   ['speed', 'tez', 'तेज', 'jaldbazi', 'जल्दबाजी', 'rushing', 'hurry', 'fast', 'daudana'],
 
   // Zones, permissions, VIP
@@ -57,7 +61,7 @@ const SYNONYM_GROUPS: string[][] = [
   ['delivery', 'swiggy', 'zomato', 'blinkit', 'zepto', 'order', 'डिलीवरी', 'courier',
    'pahunchega', 'पहुंचेगा', 'restaurant'],
   ['milk', 'doodh', 'dudh', 'दूध', 'medicine', 'dawa', 'दवा', 'essential', 'zaroori', 'जरूरी',
-   'necessities', 'cheezen', 'चीजें', 'supplies', 'saman', 'सामान'],
+   'necessities', 'cheezen', 'चीजें', 'supplies'],
   ['fuel', 'petrol', 'diesel', 'cng', 'पेट्रोल', 'डीजल', 'tank', 'tanki', 'टंकी'],
 
   // People and occasions
@@ -74,14 +78,15 @@ const SYNONYM_GROUPS: string[][] = [
   ['hotel', 'venue', 'होटल', 'summit', 'sammelan', 'सम्मेलन', 'conference'],
 
   // Information and reporting
-  ['helpline', 'complaint', 'shikayat', 'शिकायत', 'report', '1095', '112', 'soochna', 'सूचना'],
+  ['helpline', 'complaint', 'shikayat', 'शिकायत', 'report', 'reporting', 'violation',
+   '1095', '112', 'soochna', 'सूचना'],
   ['advisory', 'information', 'jankari', 'जानकारी', 'khabar', 'खबर', 'update', 'updates',
    'bharosemand', 'भरोसेमंद', 'trustworthy', 'verified', 'source'],
   ['social', 'whatsapp', 'fake', 'rumour', 'afwah', 'अफवाह', 'forward', 'jhoothi', 'झूठी',
    'unverified', 'bhej', 'भेज'],
   ['cooperate', 'sahyog', 'सहयोग', 'assist', 'madad', 'मदद', 'help', 'cooperation'],
   ['responsibility', 'zimmedari', 'जिम्मेदारी', 'kartavya', 'कर्तव्य', 'obligation', 'duty'],
-  ['rules', 'niyam', 'नियम', 'discipline', 'violation', 'flouting', 'breaking'],
+  ['rules', 'niyam', 'नियम', 'discipline', 'flouting', 'breaking', 'todna'],
   ['document', 'kagaz', 'कागज', 'praman', 'प्रमाण', 'proof', 'admit', 'patra', 'पत्र',
    'card', 'ticket', 'booking'],
   ['sudden', 'achanak', 'अचानक', 'warning', 'notice', 'bataye', 'बताए'],

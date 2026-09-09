@@ -6,7 +6,7 @@ import { conceptGroups, expandSynonyms } from '../nlp/lexicon';
 import { encodeTokens } from '../nlp/phonetic';
 import { collapseRepeats, normalize } from '../nlp/normalize';
 import { romanize } from '../nlp/translit';
-import { contentTokens } from '../nlp/tokenize';
+import { contentTokens, expandMorphology } from '../nlp/tokenize';
 import { decideBand, scoreCorpus, type ScorableDoc } from './score';
 import {
   DEFAULT_THRESHOLDS,
@@ -46,7 +46,9 @@ function searchableText(faq: Faq): string {
 function dualScriptTokens(text: string): string[] {
   const direct = contentTokens(collapseRepeats(normalize(text)));
   const roman = contentTokens(collapseRepeats(normalize(romanize(text))));
-  return [...new Set([...direct, ...roman])];
+  // Morphological variants are added on both sides, index and query, so a
+  // question in the plural meets a keyword written in the singular.
+  return expandMorphology([...new Set([...direct, ...roman])]);
 }
 
 export interface SearchOptions {
@@ -129,7 +131,7 @@ export class SearchIndex {
     const script = detectScript(normalized);
     const romanTokens = contentTokens(collapseRepeats(normalize(romanize(question))));
     const directTokens = contentTokens(normalized);
-    const tokens = [...new Set([...directTokens, ...romanTokens])];
+    const tokens = expandMorphology([...new Set([...directTokens, ...romanTokens])]);
     const lang = resolveLang(script, romanTokens, options.lang);
 
     const query = {

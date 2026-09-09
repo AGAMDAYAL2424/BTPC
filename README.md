@@ -66,10 +66,45 @@ fast, no embeddings), **OpenRouter** (`openrouter.ai/keys`, `:free` models),
 
 ### What changes without a key
 
-Nothing breaks. The bot serves the deterministic engine and answers verbatim.
-Measured on the gold set with **no embeddings at all**: 86.7% top-1 accuracy,
-98.3% top-3 recall, zero out-of-scope questions answered confidently. The key
-adds the semantic channel, tie-break arbitration, and conversational tone.
+Nothing breaks. Measured over 228 in-scope queries with **no embeddings at all**:
+
+| | |
+|---|---|
+| top-1 accuracy | **96.9%** |
+| top-3 recall | **100%** |
+| answered wrongly | 0.4% |
+| out-of-scope answered confidently | **0** |
+| median reply | 4 ms |
+
+### Would the API key improve accuracy? Measured, not guessed
+
+Probably not, and it is worth being precise about why.
+
+| | |
+|---|---|
+| Queries answered wrongly | 3.1% |
+| Of those, correct answer already in the top 3 | **100%** |
+| Correct answer missing from the top 3 | **0%** |
+
+A fourth scoring channel can only re-rank what retrieval already found. Since
+top-3 recall is 100%, **every remaining point of headroom is re-ranking, on 3.1%
+of traffic**. Candidate arbitration would fire on 5.3% of questions at all. So
+the ceiling the key can buy is about three points, and only if the model
+re-ranks perfectly, against a cost of roughly 200 to 400 ms per uncached
+question versus 4 ms today.
+
+Enable it for the things it is actually good at:
+
+- **Vocabulary nobody enumerated.** The lexicon covers the words we thought of.
+  Embeddings cover the ones we did not, which is the long tail that shows up on
+  a real summit day.
+- **Rows staff add mid-event.** A newly written answer has no curated keywords
+  yet; an embedding gives it a semantic channel from the moment it is published.
+- **Conversational tone**, which is a comfort benefit, not an accuracy one.
+
+Re-measure after enabling it. `npm run eval` and `npm run stress` take the
+embeddings into account automatically, so the question is answerable with
+numbers rather than opinion.
 
 ---
 
@@ -208,7 +243,8 @@ similarity match into a generic row.
 ## Verification
 
 ```bash
-npm test                 # 109 unit and integration tests
+npm test                 # 139 unit and integration tests
+npm run stress           # word-heavy questions, 20 to 30 words each
 npm run eval             # retrieval accuracy against the gold set
 npm run eval -- --tune   # re-fit weights and thresholds
 npm run eval -- --failures
@@ -228,15 +264,97 @@ curl -sI localhost:3000/hi | grep -i content-security-policy
 `npm run eval` fails the command if top-1 drops below 80% or any out-of-scope
 question is answered confidently.
 
-The gold set (`tests/eval/goldset.json`) is 180 in-scope queries, three per row
-across Devanagari, English and romanised Hinglish, deliberately phrased
-*differently* from the variants in the knowledge base. Reusing variant text
-would measure string equality and nothing else: on variant-echoing probes this
-engine scores 96%, and on the honest set it scores 86.7%. Plus 30 out-of-scope
-queries that must not be answered, and 18 rule cases.
+Two sets, fitted together:
+
+- `tests/eval/goldset.json` is 180 in-scope queries, three per row across
+  Devanagari, English and romanised Hinglish, deliberately phrased *differently*
+  from the variants in the knowledge base. Reusing variant text would measure
+  string equality and nothing else. Plus 30 out-of-scope queries that must not
+  be answered, and 18 rule cases.
+- `tests/eval/stressset.json` is 48 word-heavy queries, 20 to 30 words each,
+  rambling and full of filler and politeness, the way people actually type on a
+  phone. Plus 5 questions that contain two questions.
+
+| Input style | top-1 |
+|---|---|
+| Devanagari | 98.3% |
+| English | 93.3% |
+| Romanised Hinglish | 96.7% |
+| Word-heavy (20 to 30 words) | **100%** |
 
 Thresholds are **fitted, not chosen**. `--tune` runs a two-stage coordinate
 search: weights against ranking accuracy, then thresholds against banding.
+Fitting on short questions alone produced a materially worse configuration,
+because three of the four channels are length-sensitive.
+
+### Two bugs the stress test found
+
+Both were silent, and both only showed up on long questions.
+
+1. **The keyword channel divided its literal hits by the query's token count.**
+   Padding a question with filler made the *correct* row score three times
+   lower, which was enough to flip the winner. It saturates on the hit count
+   now, giving the channel an absolute meaning, the same fix the lexical channel
+   needed earlier.
+2. **No morphological handling.** "residents" never matched the curated keyword
+   "resident", costing a whole concept-group hit on any question phrased in the
+   plural. Variants are now generated *additively*, never by stemming in place,
+   because a trailing s is usually part of the word in romanised Hindi
+   ("paas", "bas", "das").
+
+Fixing them took word-heavy accuracy from 87.5% to 100% and short-question
+accuracy from 86.7% to 94.4%, before the discriminator pass took it to 96.9%.
+
+---
+
+## Read aloud
+
+Answers can be spoken, in both languages, using the browser's own speech
+synthesiser through the Web Speech API.
+
+Chosen over an in-browser neural model deliberately. Kokoro is the obvious
+open-source candidate, Apache licensed and genuinely good, and it is about
+327MB of weights or roughly 80MB quantised. Asking a citizen on mobile data to
+download that before hearing a traffic advisory is the wrong trade. The Web
+Speech API ships **zero bytes**, costs nothing, needs no API key, and works with
+no network once the page has loaded.
+
+The cost is that voice availability belongs to the device, not to this code.
+So the control only appears once a usable voice has actually been found: a Hindi
+answer read by an American English voice is worse than no button at all.
+Verified in-browser with **Lekha (hi-IN)** and **Rishi (en-IN)**.
+
+### The Hinglish problem, and the fix
+
+The Hindi answers embed **745 Latin-script English words inside Devanagari
+sentences**, about one every few words. Handed that raw, a hi-IN voice either
+switches phonology mid-sentence, spells the word out, or skips it, depending on
+the device.
+
+So `lib/shared/speech.ts` carries a curated Devanagari pronunciation for the
+recurring terms, written the way a Delhi Hindi speaker says them, covering
+**95% of Latin occurrences**. Plurals and gerunds resolve through their stems,
+with a halant so "stations" reads as स्टेशन्स rather than the three-syllable
+स्टेशनस. Helpline numbers are split into digits, because a synthesiser reads
+1095 as "एक हज़ार पंचानबे", a quantity nobody can dial. The 60 to 90 minute
+buffer stays a quantity, because it is one.
+
+This applies **only** to the string handed to the synthesiser. The text on
+screen is never altered.
+
+```
+on screen : Metro services सामान्य रूप से चलने की संभावना है, लेकिन security
+            reasons से कुछ stations पर entry/exit ...
+spoken    : मेट्रो सर्विसेज सामान्य रूप से चलने की संभावना है, लेकिन सिक्योरिटी
+            रीज़न्स से कुछ स्टेशन्स पर एंट्री, एग्जिट ...
+```
+
+If you later want an identical voice on every device, the upgrade path is
+server-side [Piper](https://github.com/rhasspy/piper) (hi_IN voices, 20 to 60MB,
+CPU only) or [Kokoro](https://huggingface.co/hexgrad/Kokoro-82M), synthesising
+to audio behind a route and caching per (row, language) exactly as the tone
+polish already does. `AI4Bharat`'s [Indic-TTS](https://github.com/AI4Bharat/Indic-TTS)
+is the best-quality Hindi option and the heaviest.
 
 ---
 

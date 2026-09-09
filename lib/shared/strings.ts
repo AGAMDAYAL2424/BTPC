@@ -40,6 +40,8 @@ export interface Strings {
   followUp: string;
   helpful: string;
   notHelpful: string;
+  readAloud: string;
+  stopReading: string;
   thanksFeedback: string;
 
   didYouMean: string;
@@ -108,6 +110,8 @@ const hi: Strings = {
   followUp: 'कुछ और पूछना चाहेंगे?',
   helpful: 'काम आया',
   notHelpful: 'काम नहीं आया',
+  readAloud: 'सुनें',
+  stopReading: 'रोकें',
   thanksFeedback: 'धन्यवाद, आपकी राय दर्ज हो गई।',
 
   didYouMean: 'क्या आप यह पूछना चाहते थे?',
@@ -185,6 +189,8 @@ const en: Strings = {
   followUp: 'Anything else I can help with?',
   helpful: 'Helpful',
   notHelpful: 'Not helpful',
+  readAloud: 'Listen',
+  stopReading: 'Stop',
   thanksFeedback: 'Thank you, your feedback has been recorded.',
 
   didYouMean: 'Did you mean one of these?',

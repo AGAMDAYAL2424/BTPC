@@ -21,6 +21,7 @@ import {
 import type { ChatReply, Suggestion } from '../../lib/shared/reply';
 import type { Lang } from '../../lib/shared/types';
 import { t } from '../../lib/shared/strings';
+import SpeakButton from './SpeakButton';
 
 /**
  * The only interactive island on the page. Everything around it - the header,
@@ -120,9 +121,12 @@ function Helplines({ reply, lang }: { reply: ChatReply; lang: Lang }) {
 function Feedback({
   messageId,
   lang,
+  spoken,
 }: {
   messageId: number;
   lang: Lang;
+  /** Text to read aloud, shown alongside the rating buttons. */
+  spoken: string;
 }) {
   const s = t(lang);
   const [sent, setSent] = useState<null | 1 | -1>(null);
@@ -140,30 +144,33 @@ function Feedback({
     [messageId],
   );
 
-  if (sent !== null) {
-    return <p className="feedback-thanks">{s.thanksFeedback}</p>;
-  }
-
   return (
     <div className="feedback">
-      <button
-        type="button"
-        className="feedback-btn"
-        aria-pressed={false}
-        onClick={() => rate(1)}
-      >
-        <ThumbsUp size={18} aria-hidden="true" />
-        {s.helpful}
-      </button>
-      <button
-        type="button"
-        className="feedback-btn"
-        aria-pressed={false}
-        onClick={() => rate(-1)}
-      >
-        <ThumbsDown size={18} aria-hidden="true" />
-        {s.notHelpful}
-      </button>
+      <SpeakButton text={spoken} lang={lang} />
+      {sent !== null ? (
+        <p className="feedback-thanks">{s.thanksFeedback}</p>
+      ) : (
+        <>
+          <button
+            type="button"
+            className="feedback-btn"
+            aria-pressed={false}
+            onClick={() => rate(1)}
+          >
+            <ThumbsUp size={18} aria-hidden="true" />
+            {s.helpful}
+          </button>
+          <button
+            type="button"
+            className="feedback-btn"
+            aria-pressed={false}
+            onClick={() => rate(-1)}
+          >
+            <ThumbsDown size={18} aria-hidden="true" />
+            {s.notHelpful}
+          </button>
+        </>
+      )}
     </div>
   );
 }
@@ -210,6 +217,12 @@ const BotTurnView = memo(function BotTurnView({
               {s.whatToSay}: {reply.escalationSummary}
             </p>
           ) : null}
+          <div className="feedback">
+            <SpeakButton
+              text={[reply.title, reply.body, reply.guidance].filter(Boolean).join('. ')}
+              lang={lang}
+            />
+          </div>
         </div>
       ) : (
         <p className="bubble bubble-bot bubble-enter">{reply.body}</p>
@@ -248,7 +261,7 @@ const BotTurnView = memo(function BotTurnView({
       ) : null}
 
       {reply.messageId !== null && reply.kind === 'answer' ? (
-        <Feedback messageId={reply.messageId} lang={lang} />
+        <Feedback messageId={reply.messageId} lang={lang} spoken={reply.body} />
       ) : null}
     </article>
   );

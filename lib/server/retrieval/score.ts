@@ -46,23 +46,35 @@ export function cosineSimilarity(a: Float32Array, b: Float32Array): number {
 
 /**
  * Curated-keyword channel. Two halves: how many of the concepts the visitor
- * mentioned this row also covers, and how many of their literal words appear
+ * mentioned this row also covers, and how strongly their literal words appear
  * in the row's hand-written keyword list.
+ *
+ * Both halves are deliberately length-insensitive. Dividing the literal hits
+ * by the query's token count, which is what this did first, penalised a row for
+ * the QUESTION being verbose rather than for being a worse answer: the correct
+ * row scored 0.087 on a four word question and 0.025 on the same question
+ * padded to fourteen words, which was enough to flip the winner. Saturating on
+ * the hit count instead gives the channel an absolute meaning, the same fix the
+ * lexical channel needed.
  */
 export function keywordScore(query: QueryRepresentation, doc: ScorableDoc): number {
   let conceptHits = 0;
   for (const g of query.groups) {
     if (doc.groups.has(g)) conceptHits += 1;
   }
-  const conceptPart = query.groups.size > 0 ? conceptHits / query.groups.size : 0;
+  // Coverage is the right measure for a focused question; the absolute count is
+  // the right one for a rambling multi-topic question, where a row that nails
+  // the main concept should not be marked down for ignoring the asides.
+  const conceptCoverage = query.groups.size > 0 ? conceptHits / query.groups.size : 0;
+  const conceptPart = Math.max(conceptCoverage, saturate(conceptHits, 1.5));
 
   let literalHits = 0;
   for (const t of query.tokens) {
     if (doc.keywords.has(t)) literalHits += 1;
   }
-  const literalPart = query.tokens.length > 0 ? literalHits / query.tokens.length : 0;
+  const literalPart = saturate(literalHits, 2);
 
-  return 0.65 * conceptPart + 0.35 * literalPart;
+  return 0.55 * conceptPart + 0.45 * literalPart;
 }
 
 export interface ScoreOptions {
@@ -79,7 +91,7 @@ export interface ScoredCorpus {
 }
 
 /** Default saturation constant for the lexical channel. Fitted, see eval.ts. */
-export const DEFAULT_BM25_K = 2;
+export const DEFAULT_BM25_K = 6;
 
 /**
  * Score every document and return them ranked.

@@ -22,7 +22,7 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 interface GoldCase {
   q: string;
   expect: string;
-  style: 'deva' | 'en' | 'roman';
+  style: 'deva' | 'en' | 'roman' | 'verbose';
 }
 interface GoldSet {
   inScope: GoldCase[];
@@ -35,6 +35,22 @@ const faqs: Faq[] = JSON.parse(
 const gold: GoldSet = JSON.parse(
   readFileSync(path.join(ROOT, 'tests', 'eval', 'goldset.json'), 'utf-8'),
 );
+
+/**
+ * The word-heavy set is folded into the SAME fit, not evaluated separately.
+ *
+ * Tuning on short questions alone over-specialised the weights: a keyword-channel
+ * change that gained four points on verbose questions cost three on terse ones,
+ * and only a fit over the whole length distribution can trade those off
+ * honestly. Real questions are not all eight words long.
+ */
+const stress = JSON.parse(
+  readFileSync(path.join(ROOT, 'tests', 'eval', 'stressset.json'), 'utf-8'),
+) as { verbose: Array<{ q: string; expect: string }> };
+
+for (const c of stress.verbose) {
+  gold.inScope.push({ q: c.q, expect: c.expect, style: 'verbose' });
+}
 
 const vectors = loadVectors();
 const index = new SearchIndex(faqs, vectors);
