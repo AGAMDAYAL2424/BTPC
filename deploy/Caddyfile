@@ -15,16 +15,23 @@ brics-helpdesk.duckdns.org {
 	@immutable path /_next/static/* /brics-logo.png
 	header @immutable Cache-Control "public, max-age=31536000, immutable"
 
-	# The admin portal is an authenticated surface on the open internet for six
-	# days. The scrypt login and the failure limiter are sound on their own; this
-	# removes the surface entirely for anyone not on the allowlist.
-	# Replace with your own address, or comment out if you need remote access.
-	@admin path /admin*
-	handle @admin {
-		@blocked not remote_ip 203.0.113.7
-		respond @blocked 404
-		reverse_proxy 127.0.0.1:3000
-	}
+	# The admin portal is not published at all.
+	#
+	# It is an authenticated surface that would otherwise sit on the open
+	# internet for six days. The scrypt login and the five-failures limiter are
+	# sound on their own, but not publishing it removes the surface rather than
+	# defending it, and an IP allowlist would lock staff out the moment a home or
+	# mobile address changed.
+	#
+	# Staff reach it over an SSH tunnel instead, which also means the session
+	# cookie never crosses the public internet:
+	#
+	#   ssh -i ~/.ssh/brics-lightsail -L 8080:127.0.0.1:3000 ubuntu@<static-ip>
+	#   then open http://localhost:8080/admin
+	#
+	# 404 rather than 403: a 403 confirms there is something there.
+	@admin path /admin /admin/*
+	respond @admin 404
 
 	reverse_proxy 127.0.0.1:3000 {
 		# Caddy appends the address it actually saw. The application reads the
