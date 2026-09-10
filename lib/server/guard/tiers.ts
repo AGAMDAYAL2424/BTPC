@@ -2,7 +2,14 @@ import 'server-only';
 import type { Tier } from '../../shared/types';
 import { config } from '../config';
 import type { KnowledgeRepo } from '../db/repo';
-import { aiLimiter, chatLimiter, floodLimiter, type LimitResult } from './ratelimit';
+import {
+  addressDegradeLimiter,
+  addressThrottleLimiter,
+  aiLimiter,
+  chatLimiter,
+  sessionFloodLimiter,
+  type LimitResult,
+} from './ratelimit';
 import { SPAM_DEGRADE_THRESHOLD, SPAM_THROTTLE_THRESHOLD, type SpamSignals } from './spam';
 
 export interface TierDecision {
@@ -14,6 +21,8 @@ export interface TierDecision {
     | 'daily_quota'
     | 'no_api_key'
     | 'spam_suspected'
+    | 'session_flood'
+    | 'address_flood'
     | 'flood';
   limit: LimitResult;
 }
@@ -21,8 +30,23 @@ export interface TierDecision {
 export interface TierInput {
   primaryKey: string;
   addressKey: string;
+  /** Address plus the visitor's session id. See `sessionKey` in ratelimit.ts. */
+  sessionKey: string;
   spam: SpamSignals;
   repo: KnowledgeRepo;
+}
+
+/** Throttle logs, at most one a minute, so a flood cannot also flood the log. */
+let lastThrottleLog = 0;
+
+function logThrottle(stage: string, key: string): void {
+  const now = Date.now();
+  if (now - lastThrottleLog < 60_000) return;
+  lastThrottleLog = now;
+  // The key is a salted hash and the prefix identifies nobody, but it is enough
+  // to tell one abusive source from every visitor collapsing onto one bucket,
+  // which is the difference between ignoring this and fixing a proxy.
+  console.warn(`[tiers] throttled on ${stage}, key ${key.slice(0, 8)}`);
 }
 
 /**
@@ -35,14 +59,27 @@ export interface TierInput {
  * too fast or because a free-tier quota ran out.
  */
 export function resolveTier(input: TierInput): TierDecision {
-  const { primaryKey, addressKey: addr, spam, repo } = input;
+  const { primaryKey, addressKey: addr, sessionKey: sess, spam, repo } = input;
 
-  const flood = floodLimiter.consume(addr);
-  if (!flood.allowed || spam.score >= SPAM_THROTTLE_THRESHOLD) {
-    return { tier: 'throttled', reason: 'flood', limit: flood };
+  // Every volume counter is consumed before any branch, so the counts stay
+  // accurate whichever way the decision goes and the ordering below is free to
+  // express severity rather than bookkeeping.
+  const hardFlood = addressThrottleLimiter.consume(addr);
+  const softFlood = addressDegradeLimiter.consume(addr);
+  const sessionFlood = sessionFloodLimiter.consume(sess);
+  const baseline = chatLimiter.consume(primaryKey);
+
+  // The only volume ceiling that refuses service, and it sits above this whole
+  // deployment's expected peak throughput from a single address.
+  if (!hardFlood.allowed) {
+    logThrottle('address', addr);
+    return { tier: 'throttled', reason: 'flood', limit: hardFlood };
   }
 
-  const baseline = chatLimiter.consume(primaryKey);
+  if (spam.score >= SPAM_THROTTLE_THRESHOLD) {
+    return { tier: 'throttled', reason: 'flood', limit: hardFlood };
+  }
+
   if (!baseline.allowed) {
     // Over the baseline but not flooding: keep answering, without the model.
     return { tier: 'deterministic', reason: 'budget_spent', limit: baseline };
@@ -58,6 +95,18 @@ export function resolveTier(input: TierInput): TierDecision {
 
   if (repo.getQuota('embed') + repo.getQuota('llm') >= config.ai.dailyQuota) {
     return { tier: 'deterministic', reason: 'daily_quota', limit: baseline };
+  }
+
+  // Stages 1 and 2. Checked after the key and quota gates because without a
+  // model there is nothing left to degrade, and reporting a volume reason for a
+  // visitor who was always going to be served deterministically would put a
+  // misleading notice on the answer.
+  if (!sessionFlood.allowed) {
+    return { tier: 'deterministic', reason: 'session_flood', limit: baseline };
+  }
+
+  if (!softFlood.allowed) {
+    return { tier: 'deterministic', reason: 'address_flood', limit: baseline };
   }
 
   const ai = aiLimiter.consume(primaryKey);

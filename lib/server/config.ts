@@ -24,6 +24,19 @@ function int(name: string, fallback: number): number {
   return Number.isFinite(n) && n > 0 ? n : fallback;
 }
 
+/**
+ * Same, but zero is a meaningful value rather than a typo.
+ *
+ * TRUSTED_PROXY_HOPS=0 is the correct setting for a process exposed directly,
+ * and `int` above would silently swap it for the fallback.
+ */
+function intAllowingZero(name: string, fallback: number): number {
+  const raw = process.env[name];
+  if (!raw) return fallback;
+  const n = Number.parseInt(raw, 10);
+  return Number.isFinite(n) && n >= 0 ? n : fallback;
+}
+
 const isProduction = process.env.NODE_ENV === 'production';
 
 /**
@@ -72,9 +85,40 @@ export const config = {
     maxQuestionChars: 500,
     /** Body cap applied before JSON parsing. */
     maxBodyBytes: 8 * 1024,
+    /**
+     * How many proxies sit in front of this process and append to
+     * `x-forwarded-for`. 1 behind our own Caddy, 2 if the traffic police
+     * reverse proxy lands in front of that, 0 when exposed directly.
+     *
+     * This is the number that decides which end of the header is trustworthy,
+     * so it is deployment configuration rather than a tuning knob. Getting it
+     * too high reads an address that is not there; too low reads one the client
+     * supplied. See `clientIp` in guard/ratelimit.ts.
+     */
+    trustedProxyHops: intAllowingZero('TRUSTED_PROXY_HOPS', 1),
+
     /** Baseline chat limiter. */
     chatWindowMs: 15 * 60 * 1000,
     chatMax: 100,
+
+    /**
+     * The three volume ceilings, all over `chatWindowMs`.
+     *
+     * Only the last one refuses service. The first two drop the visitor to the
+     * deterministic engine, which answers the same questions from the same
+     * approved text, so exceeding them costs answer polish rather than access
+     * to public safety information.
+     *
+     * They are env-tunable because the in-memory counters reset on restart
+     * anyway, which makes raising a ceiling mid-event an env edit and a
+     * restart rather than a rebuild.
+     */
+    /** Per conversation. One runaway client, without touching anyone sharing its address. */
+    sessionFloodMax: int('SESSION_FLOOD_MAX', 60),
+    /** Per address. Above any plausible carrier-NAT crowd, below sustained abuse. */
+    addressDegradeMax: int('ADDRESS_DEGRADE_MAX', 2000),
+    /** Per address, the only volume path to a 429. ~6.7 req/s from one address. */
+    addressThrottleMax: int('ADDRESS_THROTTLE_MAX', 6000),
     /** Stricter limiter counted only when a request reaches the model. */
     aiWindowMs: 60 * 60 * 1000,
     aiMax: int('AI_BUDGET_PER_WINDOW', 25),

@@ -17,6 +17,7 @@ import {
   addressKey,
   ipHash as hashIp,
   limiterKey,
+  sessionKey,
 } from '../../../lib/server/guard/ratelimit';
 import { resolveTier } from '../../../lib/server/guard/tiers';
 import { scoreSpam } from '../../../lib/server/guard/spam';
@@ -87,6 +88,7 @@ export async function POST(request: Request): Promise<Response> {
   const repo = getRepo();
   const primaryKey = limiterKey(request.headers, 'chat');
   const addrKey = addressKey(request.headers, 'chat');
+  const sessKey = sessionKey(request.headers, sessionId, 'chat');
   const session = getSession(sessionId);
   const now = Date.now();
 
@@ -100,7 +102,13 @@ export async function POST(request: Request): Promise<Response> {
     now,
   });
 
-  const decision = resolveTier({ primaryKey, addressKey: addrKey, spam, repo });
+  const decision = resolveTier({
+    primaryKey,
+    addressKey: addrKey,
+    sessionKey: sessKey,
+    spam,
+    repo,
+  });
 
   const rateHeaders = {
     'x-ratelimit-limit': String(decision.limit.limit),

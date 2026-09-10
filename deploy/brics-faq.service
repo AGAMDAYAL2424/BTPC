@@ -1,0 +1,48 @@
+# systemd unit for the BRICS traffic help desk.
+#
+# Six unattended days is the whole design constraint here: nobody is watching at
+# 3am on day four, so the process has to come back by itself and it has to come
+# back into a known state.
+#
+# Install:
+#   sudo cp deploy/brics-faq.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now brics-faq
+
+[Unit]
+Description=BRICS Summit 2026 Delhi Traffic Police help desk
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=brics
+Group=brics
+WorkingDirectory=/srv/brics
+
+# Secrets live in a root-owned file, not in this unit and not in the repo.
+EnvironmentFile=/etc/brics-faq.env
+
+ExecStart=/usr/bin/npm run start
+
+Restart=always
+RestartSec=3
+# Do not give up after the default five attempts. An unattended public safety
+# surface should keep trying rather than stay down until someone notices.
+StartLimitIntervalSec=0
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=brics-faq
+
+# The process needs to read its own tree and write exactly one directory.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/brics/data
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target

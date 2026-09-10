@@ -1,0 +1,39 @@
+# Caddy sits in front of Next and is the only thing that may reach it.
+#
+# Two jobs beyond TLS: it is the single trusted proxy hop the application
+# counts on (TRUSTED_PROXY_HOPS=1), and it takes the static asset bytes off the
+# Node process. Port 3000 must stay closed in the Lightsail firewall, because
+# "one trusted hop" is only true if nothing can bypass this.
+#
+# Replace the hostname before use.
+brics-helpdesk.duckdns.org {
+	encode zstd gzip
+
+	# Hashed build output is immutable by construction, so it can be cached hard.
+	# The HTML deliberately is not: those pages carry a per-request CSP nonce and
+	# a shared cache would hand the same nonce to different visitors.
+	@immutable path /_next/static/* /brics-logo.png
+	header @immutable Cache-Control "public, max-age=31536000, immutable"
+
+	# The admin portal is an authenticated surface on the open internet for six
+	# days. The scrypt login and the failure limiter are sound on their own; this
+	# removes the surface entirely for anyone not on the allowlist.
+	# Replace with your own address, or comment out if you need remote access.
+	@admin path /admin*
+	handle @admin {
+		@blocked not remote_ip 203.0.113.7
+		respond @blocked 404
+		reverse_proxy 127.0.0.1:3000
+	}
+
+	reverse_proxy 127.0.0.1:3000 {
+		# Caddy appends the address it actually saw. The application reads the
+		# chain from the right, so a client that forges its own X-Forwarded-For
+		# lands to the left of this value and is ignored.
+		header_up X-Forwarded-For {remote_host}
+
+		health_uri /api/health
+		health_interval 10s
+		health_timeout 5s
+	}
+}

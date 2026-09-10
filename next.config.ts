@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   devIndicators: false,
   poweredByHeader: false,
+  // Ship only the files the server actually needs, so the unit restarts fast
+  // and the deployed tree is a fraction of node_modules.
+  output: 'standalone',
   // better-sqlite3 is a native module; keep it external to the server bundle.
   serverExternalPackages: ['better-sqlite3'],
   experimental: {

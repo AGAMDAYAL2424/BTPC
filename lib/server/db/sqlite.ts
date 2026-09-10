@@ -80,8 +80,31 @@ export class SqliteRepo implements KnowledgeRepo {
   constructor(file: string) {
     mkdirSync(path.dirname(file), { recursive: true });
     this.db = new Database(file);
+    SqliteRepo.tune(this.db);
     this.db.exec(SCHEMA_SQL);
     this.seedIntents();
+  }
+
+  /**
+   * Connection pragmas, set before any schema work.
+   *
+   * The defaults are wrong for this workload in a way that only shows up under
+   * load. Out of the box SQLite journals by rollback and syncs FULL, so every
+   * message logged and every cache-hit counter costs an fsync, and a writer
+   * blocks every reader for its duration. This service writes on the answer
+   * path of every single request while locale pages are reading the same file,
+   * which is precisely the contention WAL exists to remove.
+   *
+   * NORMAL rather than FULL is the standard pairing with WAL: it can lose the
+   * last transactions to an OS-level crash, never corrupt the database. What is
+   * at stake is one analytics row, against an fsync on every request.
+   */
+  private static tune(db: Database.Database): void {
+    db.pragma('journal_mode = WAL');
+    db.pragma('synchronous = NORMAL');
+    // A reader arriving mid-checkpoint waits rather than throwing SQLITE_BUSY.
+    db.pragma('busy_timeout = 5000');
+    db.pragma('foreign_keys = ON');
   }
 
   private seedIntents(): void {
