@@ -39,7 +39,10 @@ NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=true
-ReadWritePaths=/srv/brics/data
+# The database, and .next/cache - `next start` writes optimised images there
+# for the <Image> on the locale pages, and a read-only tree fails at runtime
+# rather than at deploy time.
+ReadWritePaths=/srv/brics/data /srv/brics/.next
 ProtectKernelTunables=true
 ProtectControlGroups=true
 RestrictSUIDSGID=true

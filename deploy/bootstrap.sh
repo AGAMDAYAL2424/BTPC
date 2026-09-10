@@ -94,8 +94,9 @@ sudo -u "$APP_USER" npm ci --ignore-scripts
 sudo -u "$APP_USER" node -e "new (require('better-sqlite3'))(':memory:'); console.log('better-sqlite3 loads its prebuilt binary: ok')"
 
 set -a; . "$ENV_FILE"; set +a
-sudo -u "$APP_USER" --preserve-env=NEXT_PUBLIC_SITE_URL,NODE_ENV npm run build
-sudo -u "$APP_USER" --preserve-env=DATABASE_URL npm run db:init
+KEEP=NODE_ENV,NEXT_PUBLIC_SITE_URL,DATABASE_URL,SESSION_SECRET,AI_PROVIDER,TRUSTED_PROXY_HOPS
+sudo -u "$APP_USER" --preserve-env="$KEEP" npm run build
+sudo -u "$APP_USER" --preserve-env="$KEEP" npm run db:init
 
 log "Service"
 install -m 644 "$APP_DIR/deploy/brics-faq.service" /etc/systemd/system/brics-faq.service
@@ -109,7 +110,7 @@ caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
 systemctl restart caddy
 
 log "Backups"
-install -m 755 "$APP_DIR/deploy/backup-db.sh" "$APP_DIR/deploy/backup-db.sh"
+chmod 755 "$APP_DIR/deploy/backup-db.sh"
 ( crontab -u "$APP_USER" -l 2>/dev/null | grep -v backup-db.sh || true
   echo "0 * * * * DATABASE_URL=$APP_DIR/data/brics-faq.db $APP_DIR/deploy/backup-db.sh >> $APP_DIR/backup.log 2>&1"
 ) | crontab -u "$APP_USER" -
@@ -120,8 +121,14 @@ for i in $(seq 1 30); do
   sleep 2
 done
 echo "direct : $(curl -s --max-time 5 http://127.0.0.1:3000/api/health || echo UNREACHABLE)"
-echo "caddy  : $(curl -s --max-time 5 -H 'Host: '"${SITE_ADDR#:*}" http://127.0.0.1/api/health || echo UNREACHABLE)"
-systemctl is-active brics-faq caddy
+if [ "${SITE_ADDR:0:1}" = ":" ]; then
+  # A port-only site address serves any Host, so do not invent one.
+  echo "caddy  : $(curl -s --max-time 5 http://127.0.0.1/api/health || echo UNREACHABLE)"
+else
+  echo "caddy  : $(curl -s --max-time 5 -H "Host: $SITE_ADDR" http://127.0.0.1/api/health || echo UNREACHABLE)"
+fi
+# Reporting status must not itself abort a run that already succeeded.
+systemctl is-active brics-faq caddy || true
 
 cat <<'DONE'
 
