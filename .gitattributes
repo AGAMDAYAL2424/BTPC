@@ -1,0 +1,10 @@
+# Default: let git normalise text in the repository.
+* text=auto
+
+# These are executed by Linux on the server. A CRLF line ending turns the
+# shebang into "#!/usr/bin/env bash\r", which fails as "bad interpreter" - and
+# it fails at 3am during the event, not here. Pin them to LF regardless of what
+# core.autocrlf is set to on the machine that commits.
+*.sh            text eol=lf
+deploy/Caddyfile        text eol=lf
+deploy/*.service        text eol=lf
